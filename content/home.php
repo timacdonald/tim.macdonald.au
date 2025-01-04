@@ -16,7 +16,7 @@ $page = (object) [
         <header class="flex flex-col items-center mt-12 text-center">
             <div class="w-32 h-32 overflow-hidden rounded-full shadow-inner">
                 <img
-                    src="<?php echo e($url->asset('images/profile.png')); ?>"
+                    src="<?php $e($url->asset('images/profile.png')); ?>"
                     alt="Profile image"
                     height="175"
                     width="175"

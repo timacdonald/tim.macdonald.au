@@ -2,7 +2,7 @@
             <nav class="px-6">
                 <ul class="flex flex-wrap justify-center -mt-6 -ml-6 font-black text-xl leading-none ">
                     <li class="mt-6 ml-6">
-                        <a href="<?php echo e($url->to('/')); ?>" class="text-highlight text-electric-violet-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-600">
+                        <a href="<?php $e($url->to('/')); ?>" class="text-highlight text-electric-violet-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-600">
                             Posts
                         </a>
                     </li>
@@ -17,7 +17,7 @@
                         </a>
                     </li>
                     <li class="mt-6 ml-6">
-                        <a href="<?php echo e($url->to('feed.xml')); ?>" class="text-electric-violet-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-600">
+                        <a href="<?php $e($url->to('feed.xml')); ?>" class="text-electric-violet-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-600">
                             RSS
                         </a>
                     </li>
@@ -33,7 +33,7 @@
                     <nav class="flex items-center justify-center">
                         <ul class="font-black text-3xl leading-none text-center">
                             <li>
-                                <a href="<?php echo e($url->to('/')); ?>" class="text-highlight text-electric-violet-600 dark:text-purple-400 hover:text-electric-violet-700 dark:hover:text-purple-600">
+                                <a href="<?php $e($url->to('/')); ?>" class="text-highlight text-electric-violet-600 dark:text-purple-400 hover:text-electric-violet-700 dark:hover:text-purple-600">
                                     Posts
                                 </a>
                             </li>
@@ -48,7 +48,7 @@
                                 </a>
                             </li>
                             <li class="mt-6">
-                                <a href="<?php echo e($url->to('feed.xml')); ?>" class="text-electric-violet-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-600">
+                                <a href="<?php $e($url->to('feed.xml')); ?>" class="text-electric-violet-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-600">
                                     RSS
                                 </a>
                             </li>

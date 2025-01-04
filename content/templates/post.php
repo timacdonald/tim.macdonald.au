@@ -3,7 +3,7 @@
     <div class="w-full max-w-xl">
         <header class="mt-12 md:mt-16">
             <h1 class="text-3xl font-black leading-none text-center md:text-4xl text-electric-violet-900 dark:text-text-100">
-                <?php echo e($page->title); ?>
+                <?php $e($page->title); ?>
             </h1>
             <div class="flex items-center justify-center mt-3">
                 <div class="flex-shrink-0 mr-2">
@@ -19,8 +19,8 @@
                 </div>
                 <div class="text-sm">
                     by Tim MacDonald on the
-                    <time datetime="<?php echo e($page->date->format(DateTimeImmutable::ATOM)); ?>">
-                        <?php echo e($page->date->format('jS F, Y')); ?>
+                    <time datetime="<?php $e($page->date->format(DateTimeImmutable::ATOM)); ?>">
+                        <?php $e($page->date->format('jS F, Y')); ?>
                     </time>
                 </div>
             </div>

@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+use TiMacDonald\Website\HttpException;
+use TiMacDonald\Website\Request;
+use TiMacDonald\Website\Response;
+use TiMacDonald\Website\Url;
+
 $basePath = __DIR__.'/..';
 
 require_once "{$basePath}/vendor/autoload.php";
@@ -60,93 +65,6 @@ register_shutdown_function(static function () use ($handler): void {
     }
 });
 
-/*
- * Helpers...
- */
-
-function e(string $value): string
-{
-    return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-}
-
-class Response
-{
-    /**
-     * @param  (\Closure(): string)  $callback
-     */
-    public function __construct(
-        private Closure $callback,
-        public int $status = 200,
-    ) {
-        //
-    }
-
-    public function render(): string
-    {
-        return call_user_func($this->callback);
-    }
-
-    public function withStatus(int $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    public function decorate(Closure $callback): self
-    {
-        return new Response(fn (): string => $callback($this), $this->status);
-    }
-}
-
-class Request
-{
-    public function __construct(
-        public string $base,
-        public string $path,
-    ) {
-        $this->base = rtrim($this->base, '/');
-        $this->path = '/'.ltrim($this->path, '/');
-        //
-    }
-
-    public function url(): string
-    {
-        return $this->base.($this->path === '/' ? '' : $this->path);
-    }
-}
-
-class Url
-{
-    public function __construct(
-        private string $base,
-    ) {
-        $this->base = rtrim($this->base, '/');
-    }
-
-    public function to(string $path): string
-    {
-        $path = ltrim($path, '/');
-
-        return $this->base.($path === '' ? '' : '/'.$path);
-    }
-
-    public function asset(string $path): string
-    {
-        return $this->to($path).'?v=1';
-    }
-}
-
-class HttpException extends RuntimeException
-{
-    public function __construct(
-        public int $status,
-        string $message,
-    ) {
-        parent::__construct($message);
-    }
-}
-
 $request = new Request(
     base: 'https://tim.macdonald.au',
     path: '/'.trim($_SERVER['PATH_INFO'] ?? '', '/'),
@@ -178,13 +96,16 @@ $page = static function (string $path, array $data = []) use ($basePath, $reques
     $__path = "{$basePath}/content/{$path}";
 
     if (! is_file($__path)) {
-        throw new HttpException(404, 'Not Found');
+        throw HttpException::notFound();
     }
 
     $__data = $data;
 
     return new Response(static function () use ($basePath, $request, $__path, $__data): string {
-        $url = new Url($request->base);
+        $url = new Url(
+            base: $request->base,
+            assetVersion: '1',
+        );
 
         $markdown = static function (string $content): string {
             /**
@@ -207,6 +128,10 @@ $page = static function (string $path, array $data = []) use ($basePath, $reques
             };
 
             return $parser->transform($content);
+        };
+
+        $e = static function (string $value): void {
+            echo htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
         };
 
         extract($__data);
@@ -256,7 +181,7 @@ $handler = static fn () => match ($request->path) {
             }
         }
 
-        throw new HttpException(404, 'Not Found');
+        throw HttpException::notFound();
     })(),
 };
 
@@ -264,7 +189,7 @@ try {
     $response = $handler();
 
     if ($response->status === 200 && ! in_array($_SERVER['REQUEST_METHOD'], ['GET', 'HEAD'], strict: true)) {
-        throw new HttpException(405, 'Method Not Allowed');
+        throw HttpException::methodNotAllowed();
     }
 
     if ($response->status === 200) {

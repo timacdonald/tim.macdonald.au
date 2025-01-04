@@ -4,32 +4,32 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Assets --><!-- TODO: preloads -->
-        <link rel="stylesheet" href="<?php echo e($url->asset('assets/css/style.css')); ?>">
-        <script src="<?php echo e($url->asset('assets/js/app.js')); ?>" async></script>
+        <link rel="stylesheet" href="<?php $e($url->asset('assets/css/style.css')); ?>">
+        <script src="<?php $e($url->asset('assets/js/app.js')); ?>" async></script>
         <!-- Meta -->
-        <title><?php echo e($page->title); ?></title>
-        <meta name="description" content="<?php echo e($page->description); ?>">
-        <link rel="home" href="<?php echo e($url->to('/')); ?>">
-        <link rel="canonical" href="<?php echo e($request->url()); ?>">
-        <link type="application/atom+xml" rel="alternate" href="<?php echo e($url->to('feed.xml')); ?>" title="Tim MacDonald">
+        <title><?php $e($page->title); ?></title>
+        <meta name="description" content="<?php $e($page->description); ?>">
+        <link rel="home" href="<?php $e($url->to('/')); ?>">
+        <link rel="canonical" href="<?php $e($request->url()); ?>">
+        <link type="application/atom+xml" rel="alternate" href="<?php $e($url->to('feed.xml')); ?>" title="Tim MacDonald">
         <?php if ($page->hidden) { ?>
             <meta name="robots" content="noindex">
         <?php } ?>
         <!-- Socials -->
         <meta property="og:site_name" content="Tim MacDonald">
         <meta property="og:locale" content="en_AU">
-        <meta property="og:title" content="<?php echo e($page->title); ?>">
-        <meta property="og:description" content="<?php echo e($page->description); ?>">
-        <meta property="og:url" content="<?php echo e($request->url()); ?>">
-        <meta property="og:image" content="<?php echo e($page->image); ?>">
+        <meta property="og:title" content="<?php $e($page->title); ?>">
+        <meta property="og:description" content="<?php $e($page->description); ?>">
+        <meta property="og:url" content="<?php $e($request->url()); ?>">
+        <meta property="og:image" content="<?php $e($page->image); ?>">
         <meta property="og:image:height" content="630">
         <meta property="og:image:width" content="1200">
-        <meta property="og:image:type" content="image/<?php echo e(match (true) {
+        <meta property="og:image:type" content="image/<?php $e(match (true) {
             str_contains($page->image, '.png?') => 'png',
             str_contains($page->image, '.jpeg?') => 'jpeg',
             str_contains($page->image, '.jpg?') => 'jpeg',
         }); ?>">
-        <meta property="og:type" content="<?php echo e($page->ogType); ?>">
+        <meta property="og:type" content="<?php $e($page->ogType); ?>">
         <?php
                 // @if($page->type === 'article' || $page->type === 'talk')
                 //     <meta property="article:publisher" content="{{ $page->profiles['twitter'] }}">
@@ -40,20 +40,20 @@
         <meta name="twitter:site" content="@timacdonald87">
         <meta name="twitter:creator" content="@timacdonald87">
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="<?php echo e($page->title); ?>">
-        <meta name="twitter:description" content="<?php echo e($page->description); ?>">
-        <meta name="twitter:image" content="<?php echo e($page->image); ?>">
+        <meta name="twitter:title" content="<?php $e($page->title); ?>">
+        <meta name="twitter:description" content="<?php $e($page->description); ?>">
+        <meta name="twitter:image" content="<?php $e($page->image); ?>">
         <meta name="twitter:image:height" content="630">
         <meta name="twitter:image:width" content="1200">
         <!-- Verifications -->
         <meta name="google-site-verification" content="iCKi0Ly3F3YRL_RJ_RImfZCyQjso8mWzwmsqg__7u4U">
         <meta name="msvalidate.01" content="72E9C6204C7ED590A00C0D9D5AED2D52">
         <!-- Favicons and device themes -->
-        <link rel="apple-touch-icon" sizes="180x180" href="<?php echo e($url->asset('images/favicon/apple-touch-icon.png')); ?>">
-        <link rel="icon" type="image/png" sizes="32x32" href="<?php echo e($url->asset('images/favicon/favicon-32x32.png')); ?>">
-        <link rel="icon" type="image/png" sizes="16x16" href="<?php echo e($url->asset('images/favicon/favicon-16x16.png')); ?>">
-        <link rel="mask-icon" color="#5f40f6" href="<?php echo e($url->asset('images/favicon/safari-pinned-tab.svg')); ?>">
-        <link rel="shortcut icon" href="<?php echo e($url->asset('images/favicon/favicon.ico')); ?>">
+        <link rel="apple-touch-icon" sizes="180x180" href="<?php $e($url->asset('images/favicon/apple-touch-icon.png')); ?>">
+        <link rel="icon" type="image/png" sizes="32x32" href="<?php $e($url->asset('images/favicon/favicon-32x32.png')); ?>">
+        <link rel="icon" type="image/png" sizes="16x16" href="<?php $e($url->asset('images/favicon/favicon-16x16.png')); ?>">
+        <link rel="mask-icon" color="#5f40f6" href="<?php $e($url->asset('images/favicon/safari-pinned-tab.svg')); ?>">
+        <link rel="shortcut icon" href="<?php $e($url->asset('images/favicon/favicon.ico')); ?>">
         <meta name="msapplication-TileColor" content="#5f40f6">
         <meta name="theme-color" content="#5f40f6">
     </head>
