@@ -1,2 +1,4 @@
-/vendor
 /error.log
+/public/*
+!/public/index.php
+/vendor
