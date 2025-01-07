@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use TiMacDonald\Website\ErrorHandling;
 use TiMacDonald\Website\HttpException;
 use TiMacDonald\Website\Request;
 use TiMacDonald\Website\Response;
@@ -11,59 +12,7 @@ $basePath = __DIR__.'/..';
 
 require_once "{$basePath}/vendor/autoload.php";
 
-error_reporting(-1);
-
-ini_set('display_errors', 'Off');
-
-set_error_handler(static function (int $level, string $message, string $file = '', int $line = 0): void {
-    throw new ErrorException($message, 0, $level, $file, $line);
-});
-
-$handler = static function (string $type, string $message, string $file, int $line, string $trace) use ($basePath) {
-    header('content-type: text/plain');
-
-    $trace = $trace ? '[trace] '.PHP_EOL.$trace : '';
-
-    $output = trim(<<<EOF
-    {$type}
-
-    [message] 
-    {$message}
-
-    [file]
-    {$file}:{$line}
-
-    {$trace}
-    EOF);
-
-    echo $output;
-
-    file_put_contents("{$basePath}/error.log", '['.date('Y-m-d H:i:s').'] '.$output.PHP_EOL.PHP_EOL, flags: FILE_APPEND);
-};
-
-set_exception_handler(static function (Throwable $e) use ($handler): void {
-    $handler(
-        type: $e::class,
-        message: $e->getMessage(),
-        file: $e->getFile(),
-        line: $e->getLine(),
-        trace: $e->getTraceAsString(),
-    );
-});
-
-register_shutdown_function(static function () use ($handler): void {
-    $error = error_get_last();
-
-    if ($error !== null && in_array($error['type'], [E_COMPILE_ERROR, E_CORE_ERROR, E_ERROR, E_PARSE], strict: true)) {
-        $handler(
-            type: 'FatalError',
-            message: $error['message'],
-            file: $error['file'],
-            line: $error['line'],
-            trace: '',
-        );
-    }
-});
+ErrorHandling::bootstrap($basePath);
 
 $request = new Request(
     base: 'https://tim.macdonald.au',
