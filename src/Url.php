@@ -25,4 +25,3 @@ readonly class Url
         return $this->to($path).'?v='.$this->assetVersion;
     }
 }
-

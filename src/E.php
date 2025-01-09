@@ -9,4 +9,3 @@ class E
         echo htmlspecialchars($content, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
     }
 }
-

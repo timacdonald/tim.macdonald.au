@@ -17,7 +17,7 @@ class ErrorHandling
             throw new ErrorException($message, 0, $level, $file, $line);
         });
 
-        $logAndRender = static function (string $type, string $message, string $file, int $line, string $trace) use ($basePath): bool {
+        $logAndRender = static function (string $type, string $message, string $file, int $line, string $trace) use ($basePath): void {
             $trace = $trace ? '[trace] '.PHP_EOL.$trace : '';
 
             $output = trim(<<<EOF
@@ -32,21 +32,21 @@ class ErrorHandling
             {$trace}
             EOF);
 
-            $logged = file_put_contents("{$basePath}/error.log", '['.date('Y-m-d H:i:s').'] '.$output.PHP_EOL.PHP_EOL, flags: FILE_APPEND);
+            file_put_contents("{$basePath}/error.log", '['.date('Y-m-d H:i:s').'] '.$output.PHP_EOL.PHP_EOL, flags: FILE_APPEND);
 
             header('content-type: text/plain');
             echo $output;
-
-            return $logged !== false;
         };
 
-        set_exception_handler(static fn (Throwable $e): bool => $logAndRender(
-            type: $e::class,
-            message: $e->getMessage(),
-            file: $e->getFile(),
-            line: $e->getLine(),
-            trace: $e->getTraceAsString(),
-        ));
+        set_exception_handler(static function (Throwable $e) use ($logAndRender): void {
+            $logAndRender(
+                type: $e::class,
+                message: $e->getMessage(),
+                file: $e->getFile(),
+                line: $e->getLine(),
+                trace: $e->getTraceAsString(),
+            );
+        });
 
         register_shutdown_function(static function () use ($logAndRender): void {
             $error = error_get_last();
@@ -63,4 +63,3 @@ class ErrorHandling
         });
     }
 }
-

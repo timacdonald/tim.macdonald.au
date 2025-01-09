@@ -20,14 +20,9 @@ class Markdown
         $parser = new MarkdownExtra;
         $parser->code_class_prefix = 'language-';
         $parser->header_id_func = static function (string $heading): string {
-            $slug = mb_strtolower($heading);
-
-            $slug = preg_replace('/[^a-z0-9]/', '-', $slug);
-
-            return $slug;
+            return preg_replace('/[^a-z0-9]/', '-', mb_strtolower($heading)) ?? '';
         };
 
         return $parser->transform($content);
     }
 }
-

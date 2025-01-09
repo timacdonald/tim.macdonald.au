@@ -21,4 +21,3 @@ readonly class Request
         return $this->base.($this->path === '/' ? '' : $this->path);
     }
 }
-

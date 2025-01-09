@@ -5,7 +5,7 @@ namespace TiMacDonald\Website;
 use Closure;
 use Throwable;
 
-class Page
+class Renderer
 {
     public function __construct(
         private string $basePath,
@@ -25,17 +25,19 @@ class Page
         $__data = $data;
 
         return new Response(function () use ($__path, $__data): string {
-            extract([
+            $__data = [
                 ...$__data,
                 ...call_user_func($this->data),
-            ]);
+            ];
+
+            extract($__data);
 
             try {
                 ob_start();
                 require $__path;
                 $content = ob_get_clean() ?: '';
             } catch (Throwable $e) {
-                // ob_end_clean();
+                ob_end_clean();
 
                 throw $e;
             }
@@ -52,7 +54,7 @@ class Page
                 };
                 $content = ob_get_clean() ?: '';
             } catch (Throwable $e) {
-                // ob_end_clean();
+                ob_end_clean();
 
                 throw $e;
             }
@@ -61,4 +63,3 @@ class Page
         });
     }
 }
-
