@@ -3,6 +3,7 @@
 namespace TiMacDonald\Website;
 
 use Closure;
+use RuntimeException;
 use Throwable;
 
 class Renderer
@@ -33,9 +34,17 @@ class Renderer
             extract($__data);
 
             try {
-                ob_start();
+                if (! ob_start()) {
+                    throw new RuntimeException('Unable to start output buffering.');
+                }
+
                 require $__path;
-                $content = ob_get_clean() ?: '';
+
+                $content = ob_get_clean();
+
+                if ($content === false) {
+                    throw new RuntimeException('Unable to get the output buffer contents.');
+                }
             } catch (Throwable $e) {
                 ob_end_clean();
 
@@ -47,12 +56,19 @@ class Renderer
             }
 
             try {
-                ob_start();
-                match ($page->template) {
-                    'page' => require "{$this->basePath}/content/templates/page.php",
-                    'post' => require "{$this->basePath}/content/templates/post.php",
-                };
-                $content = ob_get_clean() ?: '';
+                $started = ob_start();
+
+                if (! $started) {
+                    throw new RuntimeException('Unable to start output buffering.');
+                }
+
+                require "{$this->basePath}/content/templates/{$page->template}.php";
+
+                $content = ob_get_clean();
+
+                if ($content === false) {
+                    throw new RuntimeException('Unable to get the output buffer contents.');
+                }
             } catch (Throwable $e) {
                 ob_end_clean();
 

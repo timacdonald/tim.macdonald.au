@@ -2,6 +2,8 @@
 
 namespace TiMacDonald\Website;
 
+use RuntimeException;
+
 class Cache
 {
     public function __construct(
@@ -21,10 +23,18 @@ class Cache
 
             if ($content === false || (bool) getenv('LOCAL')) {
                 if (! is_dir($directory = dirname($path))) {
-                    mkdir($directory, permissions: 0755, recursive: true);
+                    $result = mkdir($directory, permissions: 0755, recursive: true);
+
+                    if (! $result) {
+                        throw new RuntimeException("Unable to create directory [{$directory}].");
+                    }
                 }
 
-                file_put_contents($path, $content = $response->render());
+                $result = file_put_contents($path, $content = $response->render());
+
+                if (! $result) {
+                    throw new RuntimeException("Unable to put file contents [{$path}].");
+                }
             }
 
             return $content;

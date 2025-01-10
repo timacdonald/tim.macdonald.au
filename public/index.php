@@ -13,6 +13,18 @@ use TiMacDonald\Website\Response;
 use TiMacDonald\Website\Url;
 
 /*
+ * Helpers...
+ */
+
+function dd(...$args): never
+{
+    header('content-type: text/plain');
+    var_dump(...$args);
+
+    exit;
+}
+
+/*
  * Bootstrap...
  */
 
@@ -30,7 +42,7 @@ ErrorHandling::bootstrap($base);
 
 $request = new Request(
     base: 'https://tim.macdonald.au',
-    path: '/'.trim($_SERVER['PATH_INFO'] ?? '', '/'),
+    path: '/'.trim($_SERVER['REQUEST_URI'] ?? '', '/'),
 );
 
 /*
