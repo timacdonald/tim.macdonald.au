@@ -3,13 +3,15 @@
 $page = (object) [
     'template' => 'post',
     'hidden' => false,
+    'url' => $url->to('posts/'.pathinfo(__FILE__, flags: PATHINFO_FILENAME)),
     'title' => 'Loading Eloquent relationship counts',
     'description' => 'There are several ways to load relationship counts on eloquent models. I\'m going to explore the options and introduce you to a new one.',
     'date' => new DateTimeImmutable('@1541034000'),
-    'image' => $url->asset('images/posts/loading-counts.png'),
+    'image' => $url->asset('loading-counts.png'),
     'ogType' => 'article',
     'showMenu' => true,
     'format' => 'post',
+    'external_link' => null,
 ];
 
 ?>

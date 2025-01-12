@@ -30,13 +30,10 @@
             str_contains($page->image, '.jpg?') => 'jpeg',
         }); ?>">
         <meta property="og:type" content="<?php $e($page->ogType); ?>">
-        <?php
-                // @if($page->type === 'article' || $page->type === 'talk')
-                //     <meta property="article:publisher" content="{{ $page->profiles['twitter'] }}">
-                //     <meta property="og:article:published_time" content="{{ $page->published_at->toIso8601String() }}">
-                //     <meta property="og:article:modified_time" content="{{ $page->modified_at->toIso8601String() }}">
-                // @endif
-        ?>
+        <?php if ($page->ogType === 'article' || $page->ogType === 'talk') { ?>
+            <meta property="article:publisher" content="https://twitter.com/timacdonald87">
+            <meta property="og:article:published_time" content="<?php $e($page->date->format(DateTimeImmutable::ATOM)); ?>">
+        <?php } ?>
         <meta name="twitter:site" content="@timacdonald87">
         <meta name="twitter:creator" content="@timacdonald87">
         <meta name="twitter:card" content="summary_large_image">
