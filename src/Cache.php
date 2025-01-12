@@ -7,7 +7,7 @@ use RuntimeException;
 class Cache
 {
     public function __construct(
-        public string $basePath,
+        public string $projectBase,
         public bool $production,
     ) {
         //
@@ -16,7 +16,7 @@ class Cache
     public function __invoke(string $path, Response $response): Response
     {
         return $response->decorate(function ($response) use ($path): string {
-            $path = "{$this->basePath}/public{$path}/index.html";
+            $path = "{$this->projectBase}/public{$path}/index.html";
 
             $content = is_file($path)
                 ? file_get_contents($path)

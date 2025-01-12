@@ -4,7 +4,7 @@ $page = (object) [
     'showMenu' => true,
     'hidden' => false,
     'template' => 'page',
-    'image' => $url->asset('images/pages/fallback.png'),
+    'image' => $url->asset('fallback.png'),
     // ...
     'title' => 'Tim MacDonald • Laravel & PHP Developer • Melbourne, Australia',
     'description' => 'Developing engaging and performant web applications with Laravel and PHP. Love building for the web.',
@@ -16,7 +16,7 @@ $page = (object) [
         <header class="flex flex-col items-center mt-12 text-center">
             <div class="w-32 h-32 overflow-hidden rounded-full shadow-inner">
                 <img
-                    src="<?php $e($url->asset('images/profile.png')); ?>"
+                    src="<?php $e($url->asset('profile.png')); ?>"
                     alt="Profile image"
                     height="175"
                     width="175"

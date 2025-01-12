@@ -1,5 +1,5 @@
 <?php
 
-require "{$basePath}/resources/views/templates/head.php";
+require "{$projectBase}/resources/views/templates/head.php";
 echo $content;
-require "{$basePath}/resources/views/templates/foot.php";
+require "{$projectBase}/resources/views/templates/foot.php";

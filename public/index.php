@@ -28,11 +28,13 @@ function dd(...$args): never
  * Bootstrap...
  */
 
-$base = __DIR__.'/..';
+$projectBase = realpath(__DIR__.'/../');
 
-require_once "{$base}/vendor/autoload.php";
+assert(is_string($projectBase));
 
-ErrorHandling::bootstrap($base);
+require_once "{$projectBase}/vendor/autoload.php";
+
+ErrorHandling::bootstrap($projectBase);
 
 $production = ! getenv('LOCAL');
 
@@ -51,12 +53,13 @@ $request = new Request(
  * Create renderer...
  */
 
-$render = new Renderer($base, static fn () => [
-    'basePath' => $base,
+$render = new Renderer($projectBase, static fn () => [
+    'projectBase' => $projectBase,
     'request' => $request,
     'url' => new Url(
         base: $request->base,
         assetVersion: '1',
+        projectBase: $projectBase,
     ),
     'e' => new E,
     'markdown' => new Markdown,
@@ -105,7 +108,7 @@ try {
         /*
          * Cache known routes...
          */
-        $cache = new Cache($base, $production);
+        $cache = new Cache($projectBase, $production);
 
         $response = $cache($request->path, $response);
     }

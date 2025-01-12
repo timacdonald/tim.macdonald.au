@@ -9,7 +9,7 @@ use Throwable;
 class Renderer
 {
     public function __construct(
-        private string $basePath,
+        private string $projectBase,
         private Closure $data,
     ) {
         //
@@ -17,7 +17,7 @@ class Renderer
 
     public function __invoke(string $path, array $data = []): Response
     {
-        $__path = "{$this->basePath}/resources/views/{$path}";
+        $__path = "{$this->projectBase}/resources/views/{$path}";
 
         if (! is_file($__path)) {
             throw HttpException::notFound();
@@ -62,7 +62,7 @@ class Renderer
                     throw new RuntimeException('Unable to start output buffering.');
                 }
 
-                require "{$this->basePath}/resources/views/templates/{$page->template}.php";
+                require "{$this->projectBase}/resources/views/templates/{$page->template}.php";
 
                 $content = ob_get_clean();
 

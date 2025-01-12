@@ -4,7 +4,7 @@ $page = (object) [
     'showMenu' => true,
     'hidden' => false,
     'template' => 'page',
-    'image' => $url->asset('images/pages/fallback.png'),
+    'image' => $url->asset('fallback.png'),
     //
     'title' => 'About',
     'description' => 'About me',

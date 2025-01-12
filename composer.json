@@ -10,8 +10,15 @@
         }
     },
     "scripts": {
+        "deploy": [
+            "@build",
+            "@flush"
+        ],
+        "build": [
+            "npm run build"
+        ],
         "flush": [
-            "gfind -maxdepth 2 -type d -path './public/*' > files.txt",
+            "gfind -maxdepth 2 -type d -path './public/*' -not -path './public/assets' > files.txt",
             "gfind -maxdepth 2 -type f -path './public/*.html' >> files.txt",
             "cat files.txt",
             "cat files.txt | xargs rm -rf",

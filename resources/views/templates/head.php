@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Assets --><!-- TODO: preloads -->
-        <link rel="stylesheet" href="<?php $e($url->asset('assets/site.css')); ?>">
-        <script src="<?php $e($url->asset('assets/site.js')); ?>" async></script>
+        <link rel="stylesheet" href="<?php $e($url->asset('site.css')); ?>">
+        <script src="<?php $e($url->asset('site.js')); ?>" async></script>
         <!-- Meta -->
         <title><?php $e($page->title); ?></title>
         <meta name="description" content="<?php $e($page->description); ?>">
@@ -49,11 +49,11 @@
         <meta name="google-site-verification" content="iCKi0Ly3F3YRL_RJ_RImfZCyQjso8mWzwmsqg__7u4U">
         <meta name="msvalidate.01" content="72E9C6204C7ED590A00C0D9D5AED2D52">
         <!-- Favicons and device themes -->
-        <link rel="apple-touch-icon" sizes="180x180" href="<?php $e($url->asset('images/favicon/apple-touch-icon.png')); ?>">
-        <link rel="icon" type="image/png" sizes="32x32" href="<?php $e($url->asset('images/favicon/favicon-32x32.png')); ?>">
-        <link rel="icon" type="image/png" sizes="16x16" href="<?php $e($url->asset('images/favicon/favicon-16x16.png')); ?>">
-        <link rel="mask-icon" color="#5f40f6" href="<?php $e($url->asset('images/favicon/safari-pinned-tab.svg')); ?>">
-        <link rel="shortcut icon" href="<?php $e($url->asset('images/favicon/favicon.ico')); ?>">
+        <link rel="apple-touch-icon" sizes="180x180" href="<?php $e($url->asset('apple-touch-icon.png')); ?>">
+        <link rel="icon" type="image/png" sizes="32x32" href="<?php $e($url->asset('favicon-32x32.png')); ?>">
+        <link rel="icon" type="image/png" sizes="16x16" href="<?php $e($url->asset('favicon-16x16.png')); ?>">
+        <link rel="mask-icon" color="#5f40f6" href="<?php $e($url->asset('safari-pinned-tab.svg')); ?>">
+        <link rel="shortcut icon" href="<?php $e($url->asset('favicon.ico')); ?>">
         <meta name="msapplication-TileColor" content="#5f40f6">
         <meta name="theme-color" content="#5f40f6">
     </head>

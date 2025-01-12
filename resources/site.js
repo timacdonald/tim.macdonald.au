@@ -1,3 +1,4 @@
+import.meta.glob(['./images/**'])
 import MicroModal from 'micromodal'
 import Prism from 'prismjs'
 
