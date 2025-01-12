@@ -34,6 +34,8 @@ require_once "{$base}/vendor/autoload.php";
 
 ErrorHandling::bootstrap($base);
 
+$production = ! getenv('LOCAL');
+
 /*
  * Capture request...
  *
@@ -41,7 +43,7 @@ ErrorHandling::bootstrap($base);
  */
 
 $request = new Request(
-    base: 'https://tim.macdonald.au',
+    base: $production ? 'https://tim.macdonald.au' : 'http://'.$_SERVER['HTTP_HOST'],
     path: '/'.trim($_SERVER['REQUEST_URI'] ?? '', '/'),
 );
 
@@ -103,7 +105,7 @@ try {
         /*
          * Cache known routes...
          */
-        $cache = new Cache($base);
+        $cache = new Cache($base, $production);
 
         $response = $cache($request->path, $response);
     }

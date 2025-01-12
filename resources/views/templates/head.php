@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Assets --><!-- TODO: preloads -->
-        <link rel="stylesheet" href="<?php $e($url->asset('assets/css/style.css')); ?>">
-        <script src="<?php $e($url->asset('assets/js/app.js')); ?>" async></script>
+        <link rel="stylesheet" href="<?php $e($url->asset('assets/site.css')); ?>">
+        <script src="<?php $e($url->asset('assets/site.js')); ?>" async></script>
         <!-- Meta -->
         <title><?php $e($page->title); ?></title>
         <meta name="description" content="<?php $e($page->description); ?>">

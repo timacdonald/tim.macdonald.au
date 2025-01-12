@@ -8,6 +8,7 @@ class Cache
 {
     public function __construct(
         public string $basePath,
+        public bool $production,
     ) {
         //
     }
@@ -21,7 +22,7 @@ class Cache
                 ? file_get_contents($path)
                 : false;
 
-            if ($content === false || (bool) getenv('LOCAL')) {
+            if ($content === false || ! $this->production) {
                 if (! is_dir($directory = dirname($path))) {
                     $result = mkdir($directory, permissions: 0755, recursive: true);
 

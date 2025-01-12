@@ -1,4 +1,4 @@
-<?php require "{$basePath}/content/templates/head.php"; ?>
+<?php require "{$basePath}/resources/views/templates/head.php"; ?>
 <article class="flex justify-center flex-grow px-6">
     <div class="w-full max-w-xl">
         <header class="mt-12 md:mt-16">
@@ -30,4 +30,4 @@
         </div>
     </div>
 </article>
-<?php require "{$basePath}/content/templates/foot.php"; ?>
+<?php require "{$basePath}/resources/views/templates/foot.php"; ?>
