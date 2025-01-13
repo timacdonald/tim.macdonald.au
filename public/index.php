@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use TiMacDonald\Website\Cache;
+use TiMacDonald\Website\Collection;
 use TiMacDonald\Website\E;
 use TiMacDonald\Website\ErrorHandling;
 use TiMacDonald\Website\HttpException;
@@ -16,7 +17,7 @@ use TiMacDonald\Website\Url;
  * Helpers...
  */
 
-function dd(...$args): never
+function dd(mixed ...$args): never
 {
     header('content-type: text/plain');
     var_dump(...$args);
@@ -49,20 +50,27 @@ $request = new Request(
     path: '/'.trim($_SERVER['REQUEST_URI'] ?? '', '/'),
 );
 
+/**
+ * Create collection helper...
+ */
+$collection = new Collection($projectBase, $props = static fn () => [
+    'projectBase' => $projectBase,
+    'request' => $request,
+    'url' => new Url(
+        base: $request->base,
+        projectBase: $projectBase,
+    ),
+    'e' => new E,
+    'markdown' => new Markdown,
+]);
+
 /*
  * Create renderer...
  */
 
 $render = new Renderer($projectBase, static fn () => [
-    'projectBase' => $projectBase,
-    'request' => $request,
-    'url' => new Url(
-        base: $request->base,
-        assetVersion: '1',
-        projectBase: $projectBase,
-    ),
-    'e' => new E,
-    'markdown' => new Markdown,
+    ...$props(),
+    'collection' => $collection,
 ]);
 
 /*

@@ -1,4 +1,11 @@
-<!doctype html>
+<?php
+/**
+ * Props.
+ *
+ * @var string $message
+ * @var (callable(string): void) $e
+ */
+?><!doctype html>
 <html>
     <head lang="en">
         <meta charset="utf-8">

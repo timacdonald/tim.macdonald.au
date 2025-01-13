@@ -1,4 +1,19 @@
-<?php require "{$projectBase}/resources/views/templates/head.php"; ?>
+<?php
+
+/**
+ * Props.
+ *
+ * @var object $page
+ * @var string $content
+ * @var string $projectBase
+ * @var \TiMacDonald\Website\Request $request
+ * @var \TiMacDonald\Website\Url $url
+ * @var (callable(string): void) $e
+ * @var \TiMacDonald\Website\Markdown $markdown
+ * @var \TiMacDonald\Website\Collection $collection
+ */
+
+require "{$projectBase}/resources/views/templates/head.php"; ?>
 <article class="flex justify-center flex-grow px-6">
     <div class="w-full max-w-xl">
         <header class="mt-12 md:mt-16">

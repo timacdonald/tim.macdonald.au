@@ -1,4 +1,16 @@
-<!doctype html>
+<?php
+/**
+ * Props.
+ *
+ * @var object $page
+ * @var string $projectBase
+ * @var \TiMacDonald\Website\Request $request
+ * @var \TiMacDonald\Website\Url $url
+ * @var (callable(string): void) $e
+ * @var \TiMacDonald\Website\Markdown $markdown
+ * @var \TiMacDonald\Website\Collection $collection
+ */
+?><!doctype html>
 <html lang="en" class="md:text-xl text-lg font-sans antialiased leading-tight bg-white text-electric-violet-950 dark:text-electric-violet-100 dark:bg-near-black">
     <head>
         <meta charset="utf-8">
@@ -28,6 +40,7 @@
             str_contains($page->image, '.png?') => 'png',
             str_contains($page->image, '.jpeg?') => 'jpeg',
             str_contains($page->image, '.jpg?') => 'jpeg',
+            default => throw new RuntimeException("Unknown og:image:type extension [{$page->image}].")
         }); ?>">
         <meta property="og:type" content="<?php $e($page->ogType); ?>">
         <?php if ($page->ogType === 'article' || $page->ogType === 'talk') { ?>

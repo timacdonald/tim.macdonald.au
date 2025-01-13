@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * Props.
+ *
+ * @var string $projectBase
+ * @var \TiMacDonald\Website\Request $request
+ * @var \TiMacDonald\Website\Url $url
+ * @var (callable(string): void) $e
+ * @var \TiMacDonald\Website\Markdown $markdown
+ * @var \TiMacDonald\Website\Collection $collection
+ */
+
+// ...
+
 $page = (object) [
     'showMenu' => true,
     'hidden' => false,
@@ -10,22 +23,6 @@ $page = (object) [
     'description' => 'Developing engaging and performant web applications with Laravel and PHP. Love building for the web.',
     'ogType' => 'website',
 ];
-
-$posts = array_map(static function (string $path) use ($__data): object {
-    extract($__data);
-
-    if (! ob_start()) {
-        throw new RuntimeException('Unable to start output buffering.');
-    }
-
-    require $path;
-
-    ob_end_clean();
-
-    // TODO ignore hidden
-
-    return $page;
-}, glob("{$projectBase}/resources/views/posts/*"));
 
 ?><div class="flex justify-center px-6">
     <div class="w-full max-w-xl">
@@ -54,7 +51,7 @@ $posts = array_map(static function (string $path) use ($__data): object {
             </div>
         </header>
         <ul>
-            <?php foreach ($posts as $post) { ?>
+            <?php foreach ($collection('posts') as $post) { ?>
                 <li class="relative pb-16 md:pb-8 md:pt-4 my-16 md:-ml-8 md:pl-8 md:border-l-2 border-electric-violet-100 dark:border-electric-violet-900">
                     <h3 class="text-lg font-black text-electric-violet-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-600 md:text-2xl">
                         <a href="<?php $e($post->url); ?>">

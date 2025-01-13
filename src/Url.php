@@ -10,7 +10,6 @@ readonly class Url
 
     public function __construct(
         string $base,
-        private string $assetVersion,
         private string $projectBase,
     ) {
         $this->base = rtrim($base, '/');

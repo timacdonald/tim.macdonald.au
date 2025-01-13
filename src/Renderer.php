@@ -10,12 +10,15 @@ class Renderer
 {
     public function __construct(
         private string $projectBase,
-        private Closure $data,
+        private Closure $props,
     ) {
         //
     }
 
-    public function __invoke(string $path, array $data = []): Response
+    /**
+     * @param  array<string, mixed>  $props
+     */
+    public function __invoke(string $path, array $props = []): Response
     {
         $__path = "{$this->projectBase}/resources/views/{$path}";
 
@@ -23,15 +26,15 @@ class Renderer
             throw HttpException::notFound();
         }
 
-        $__data = $data;
+        $__props = $props;
 
-        return new Response(function () use ($__path, $__data): string {
-            $__data = [
-                ...$__data,
-                ...call_user_func($this->data),
+        return new Response(function () use ($__path, $__props): string {
+            $__props = [
+                ...$__props,
+                ...call_user_func($this->props),
             ];
 
-            extract($__data);
+            extract($__props);
 
             try {
                 if (! ob_start()) {
@@ -56,9 +59,7 @@ class Renderer
             }
 
             try {
-                $started = ob_start();
-
-                if (! $started) {
+                if (! ob_start()) { // @phpstan-ignore booleanNot.alwaysFalse
                     throw new RuntimeException('Unable to start output buffering.');
                 }
 
