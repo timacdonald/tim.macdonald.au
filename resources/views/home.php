@@ -1,5 +1,9 @@
 <?php
 
+use TiMacDonald\Website\OgType;
+use TiMacDonald\Website\Page;
+use TiMacDonald\Website\Template;
+
 /**
  * Props.
  *
@@ -13,16 +17,13 @@
 
 // ...
 
-$page = (object) [
-    'showMenu' => true,
-    'hidden' => false,
-    'template' => 'page',
-    'image' => $url->asset('fallback.png'),
-    // ...
-    'title' => 'Tim MacDonald • Laravel & PHP Developer • Melbourne, Australia',
-    'description' => 'Developing engaging and performant web applications with Laravel and PHP. Love building for the web.',
-    'ogType' => 'website',
-];
+$page = new Page(
+    template: Template::Page,
+    image: $url->asset('fallback.png'),
+    title: 'Tim MacDonald • Laravel & PHP Developer • Melbourne, Australia',
+    description: 'Developing engaging and performant web applications with Laravel and PHP. Love building for the web.',
+    ogType: OgType::Website,
+);
 
 ?><div class="flex justify-center px-6">
     <div class="w-full max-w-xl">

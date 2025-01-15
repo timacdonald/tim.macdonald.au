@@ -6,7 +6,7 @@ use Closure;
 use RuntimeException;
 use Throwable;
 
-class Renderer
+readonly class Renderer
 {
     public function __construct(
         private string $projectBase,
@@ -63,7 +63,7 @@ class Renderer
                     throw new RuntimeException('Unable to start output buffering.');
                 }
 
-                require "{$this->projectBase}/resources/views/templates/{$page->template}.php";
+                require "{$this->projectBase}/resources/views/templates/{$page->template->value}.php";
 
                 $content = ob_get_clean();
 

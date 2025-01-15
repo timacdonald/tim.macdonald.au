@@ -5,7 +5,7 @@ namespace TiMacDonald\Website;
 use Closure;
 use RuntimeException;
 
-class Collection
+readonly class Collection
 {
     public function __construct(
         private string $projectBase,
@@ -16,7 +16,7 @@ class Collection
 
     /**
      * @param  array<string, mixed>  $props
-     * @return list<object>
+     * @return list<Page>
      */
     public function __invoke(string $name, array $props = []): array
     {
@@ -28,7 +28,7 @@ class Collection
             throw new RuntimeException("Unable to glob for collection [{$name}].");
         }
 
-        return array_map(function (string $path) use ($__props): object {
+        return array_map(function (string $path) use ($__props): Page {
             $__props = [
                 ...$__props,
                 ...call_user_func($this->props),
@@ -44,8 +44,8 @@ class Collection
             require $path;
             ob_end_clean();
 
-            if (! isset($page) || ! is_object($page)) {
-                throw new RuntimeException("Did not find page object in [{$path}].");
+            if (! isset($page) || ! ($page instanceof Page)) {
+                throw new RuntimeException("Did not find Page in [{$path}].");
             }
 
             // TODO ignore hidden

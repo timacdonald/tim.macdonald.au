@@ -4,7 +4,7 @@ namespace TiMacDonald\Website;
 
 use RuntimeException;
 
-class Cache
+readonly class Cache
 {
     public function __construct(
         public string $projectBase,

@@ -1,8 +1,11 @@
 <?php
+
+use TiMacDonald\Website\OgType;
+
 /**
  * Props.
  *
- * @var object $page
+ * @var \TiMacDonald\Website\Page $page
  * @var string $projectBase
  * @var \TiMacDonald\Website\Request $request
  * @var \TiMacDonald\Website\Url $url
@@ -42,9 +45,8 @@
             str_contains($page->image, '.jpg?') => 'jpeg',
             default => throw new RuntimeException("Unknown og:image:type extension [{$page->image}].")
         }); ?>">
-        <meta property="og:type" content="<?php $e($page->ogType); ?>">
-        <?php if ($page->ogType === 'article' || $page->ogType === 'talk') { ?>
-            <meta property="article:publisher" content="https://twitter.com/timacdonald87">
+        <meta property="og:type" content="<?php $e($page->ogType->value); ?>">
+        <?php if ($page->ogType === OgType::Article) { ?>
             <meta property="og:article:published_time" content="<?php $e($page->date->format(DateTimeImmutable::ATOM)); ?>">
         <?php } ?>
         <meta name="twitter:site" content="@timacdonald87">
@@ -55,9 +57,6 @@
         <meta name="twitter:image" content="<?php $e($page->image); ?>">
         <meta name="twitter:image:height" content="630">
         <meta name="twitter:image:width" content="1200">
-        <!-- Verifications -->
-        <meta name="google-site-verification" content="iCKi0Ly3F3YRL_RJ_RImfZCyQjso8mWzwmsqg__7u4U">
-        <meta name="msvalidate.01" content="72E9C6204C7ED590A00C0D9D5AED2D52">
         <!-- Favicons and device themes -->
         <link rel="apple-touch-icon" sizes="180x180" href="<?php $e($url->asset('apple-touch-icon.png')); ?>">
         <link rel="icon" type="image/png" sizes="32x32" href="<?php $e($url->asset('favicon-32x32.png')); ?>">

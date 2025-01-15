@@ -2,7 +2,7 @@
 
 namespace TiMacDonald\Website;
 
-class E
+readonly class E
 {
     public function __invoke(string $content): void
     {

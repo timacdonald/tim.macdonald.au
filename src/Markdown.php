@@ -4,7 +4,7 @@ namespace TiMacDonald\Website;
 
 use Michelf\MarkdownExtra;
 
-class Markdown
+readonly class Markdown
 {
     public function __invoke(string $content): string
     {

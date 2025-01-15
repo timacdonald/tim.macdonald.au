@@ -5,7 +5,7 @@ namespace TiMacDonald\Website;
 use ErrorException;
 use Throwable;
 
-class ErrorHandling
+readonly class ErrorHandling
 {
     public static function bootstrap(string $projectBase): void
     {

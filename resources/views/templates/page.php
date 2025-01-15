@@ -3,7 +3,7 @@
 /**
  * Props.
  *
- * @var object $page
+ * @var \TiMacDonald\Website\Page $page
  * @var string $content
  * @var string $projectBase
  * @var \TiMacDonald\Website\Request $request
