@@ -1,5 +1,7 @@
 <?php
 
+use TiMacDonald\Website\Page;
+
 /**
  * Props.
  *
@@ -11,21 +13,15 @@
  * @var \TiMacDonald\Website\Collection $collection
  */
 
- // ...
+// ...
 
-$page = (object) [
-    'template' => 'post',
-    'hidden' => false,
-    'url' => $url->to('posts/'.pathinfo(__FILE__, flags: PATHINFO_FILENAME)),
-    'title' => 'Loading Eloquent relationship counts',
-    'description' => 'There are several ways to load relationship counts on eloquent models. I\'m going to explore the options and introduce you to a new one.',
-    'date' => new DateTimeImmutable('@1541034000'),
-    'image' => $url->asset('loading-counts.png'),
-    'ogType' => 'article',
-    'showMenu' => true,
-    'format' => 'post',
-    'external_link' => null,
-];
+$page = Page::fromPost(
+    file: __FILE__,
+    title: 'Loading Eloquent relationship counts',
+    description: 'There are several ways to load relationship counts on eloquent models. I\'m going to explore the options and introduce you to a new one.',
+    date: DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2018-11-01 12:00:00', new DateTimeZone('Australia/Melbourne')),
+    image: $url->asset('loading-counts.png'),
+);
 
 ?>
 

@@ -1,8 +1,7 @@
 <?php
 
-use TiMacDonald\Website\OgType;
+use TiMacDonald\Website\Format;
 use TiMacDonald\Website\Page;
-use TiMacDonald\Website\Template;
 
 /**
  * Props.
@@ -18,11 +17,10 @@ use TiMacDonald\Website\Template;
 // ...
 
 $page = new Page(
-    template: Template::Page,
+    file: __FILE__,
     image: $url->asset('fallback.png'),
     title: 'Tim MacDonald • Laravel & PHP Developer • Melbourne, Australia',
     description: 'Developing engaging and performant web applications with Laravel and PHP. Love building for the web.',
-    ogType: OgType::Website,
 );
 
 ?><div class="flex justify-center px-6">
@@ -55,14 +53,14 @@ $page = new Page(
             <?php foreach ($collection('posts') as $post) { ?>
                 <li class="relative pb-16 md:pb-8 md:pt-4 my-16 md:-ml-8 md:pl-8 md:border-l-2 border-electric-violet-100 dark:border-electric-violet-900">
                     <h3 class="text-lg font-black text-electric-violet-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-600 md:text-2xl">
-                        <a href="<?php $e($post->url); ?>">
+                        <a href="<?php $e($url->page($post)); ?>">
                             <?php $e($post->title); ?>
                         </a>
                     </h3>
                     <div class="flex items-center mt-2">
                         <div class="flex-shrink-0 mr-2">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-4 h-4 fill-current">
-                                <?php if ($post->format === 'video') { ?>
+                                <?php if ($post->format === Format::Video) { ?>
                                     <title>Video post</title>
                                     <path d="M16 7l4-4v14l-4-4v3a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4c0-1.1.9-2 2-2h12a2 2 0 0 1 2 2v3zm-8 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0-2a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/>
                                 <?php } else { ?>
@@ -71,7 +69,7 @@ $page = new Page(
                                 <?php } ?>
                             </svg>
                         </div>
-                        <?php if ($post->external_link) { ?>
+                        <?php if ($post->externalLink) { ?>
                             <div class="flex-shrink-0 mr-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-4 h-4 fill-current">
                                     <title>Guest post</title>

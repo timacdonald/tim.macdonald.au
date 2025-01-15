@@ -28,7 +28,7 @@ readonly class Collection
             throw new RuntimeException("Unable to glob for collection [{$name}].");
         }
 
-        return array_map(function (string $path) use ($__props): Page {
+        return array_filter(array_map(function (string $path) use ($__props): ?Page {
             $__props = [
                 ...$__props,
                 ...call_user_func($this->props),
@@ -48,8 +48,12 @@ readonly class Collection
                 throw new RuntimeException("Did not find Page in [{$path}].");
             }
 
+            if ($page->hidden) {
+                return null;
+            }
+
             // TODO ignore hidden
             return $page;
-        }, $paths);
+        }, $paths));
     }
 }

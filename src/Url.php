@@ -17,9 +17,24 @@ readonly class Url
 
     public function to(string $path): string
     {
-        $path = ltrim($path, '/');
+        $path = trim($path, '/');
 
         return $this->base.($path === '' ? '' : '/'.$path);
+    }
+
+    public function page(Page $page): string
+    {
+        $resourcesDirectory = $this->projectBase.'/resources/views';
+
+        if (! str_starts_with($page->file, $resourcesDirectory)) {
+            throw new RuntimeException('Page file must start with the resources directory.');
+        }
+
+        $path = substr($page->file, strlen($resourcesDirectory));
+
+        ['dirname' => $directory, 'filename' => $file] = pathinfo($path);
+
+        return $this->to("{$directory}/{$file}");
     }
 
     public function asset(string $path): string

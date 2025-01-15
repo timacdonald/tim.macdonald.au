@@ -2,17 +2,47 @@
 
 namespace TiMacDonald\Website;
 
+use DateTimeImmutable;
+
 readonly class Page
 {
     public function __construct(
-        public Template $template,
+        public string $file,
         public string $image,
         public string $title,
         public string $description,
-        public OgType $ogType,
-        public bool $showMenu = true,
         public bool $hidden = false,
+        public Template $template = Template::Page,
+        public OgType $ogType = OgType::Website,
+        public ?DateTimeImmutable $date = null,
+        public ?Format $format = null,
+        public ?string $externalLink = null,
     ) {
         //
+    }
+
+    public static function fromPost(
+        string $image,
+        string $title,
+        string $description,
+        string $file,
+        DateTimeImmutable $date,
+        bool $hidden = false,
+        Template $template = Template::Post,
+        OgType $ogType = OgType::Article,
+        Format $format = Format::Article,
+        ?string $externalLink = null,
+    ): self {
+        return new self(
+            file: $file,
+            image: $image,
+            title: $title,
+            description: $description,
+            date: $date,
+            hidden: $hidden,
+            template: $template,
+            ogType: $ogType,
+            externalLink: $externalLink,
+        );
     }
 }

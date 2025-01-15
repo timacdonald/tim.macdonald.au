@@ -19,6 +19,7 @@ use TiMacDonald\Website\Url;
 
 function dd(mixed ...$args): never
 {
+    ob_end_clean();
     header('content-type: text/plain');
     var_dump(...$args);
 
