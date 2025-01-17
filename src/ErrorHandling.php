@@ -18,6 +18,8 @@ readonly class ErrorHandling
         });
 
         $logAndRender = static function (string $type, string $message, string $file, int $line, string $trace) use ($projectBase): void {
+            ob_end_clean();
+
             $trace = $trace ? '[trace] '.PHP_EOL.$trace : '';
 
             $output = trim(<<<EOF

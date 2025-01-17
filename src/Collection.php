@@ -52,7 +52,6 @@ readonly class Collection
                 return null;
             }
 
-            // TODO ignore hidden
             return $page;
         }, $paths);
 
