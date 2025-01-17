@@ -28,7 +28,7 @@ readonly class Collection
             throw new RuntimeException("Unable to glob for collection [{$name}].");
         }
 
-        return array_filter(array_map(function (string $path) use ($__props): ?Page {
+        $collection = array_map(function (string $path) use ($__props): ?Page {
             $__props = [
                 ...$__props,
                 ...call_user_func($this->props),
@@ -54,6 +54,14 @@ readonly class Collection
 
             // TODO ignore hidden
             return $page;
-        }, $paths));
+        }, $paths);
+
+        $collection = array_filter($collection);
+
+        usort($collection, static function (Page $a, Page $b): int {
+            return $a->date < $b->date ? 1 : -1;
+        });
+
+        return $collection;
     }
 }

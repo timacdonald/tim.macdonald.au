@@ -7,4 +7,3 @@ enum Format
     case Article;
     case Video;
 }
-

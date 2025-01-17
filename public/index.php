@@ -114,12 +114,14 @@ try {
             throw HttpException::methodNotAllowed();
         }
 
-        /*
-         * Cache known routes...
-         */
-        $cache = new Cache($projectBase, $production);
+        if ($production) {
+            /*
+             * Cache known routes...
+             */
+            $cache = new Cache($projectBase);
 
-        $response = $cache($request->path, $response);
+            $response = $cache($request->path, $response);
+        }
     }
 } catch (HttpException $e) {
     /*

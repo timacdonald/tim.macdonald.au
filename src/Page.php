@@ -3,6 +3,7 @@
 namespace TiMacDonald\Website;
 
 use DateTimeImmutable;
+use DateTimeZone;
 
 readonly class Page
 {
@@ -14,7 +15,7 @@ readonly class Page
         public bool $hidden = false,
         public Template $template = Template::Page,
         public OgType $ogType = OgType::Website,
-        public ?DateTimeImmutable $date = null,
+        public DateTimeImmutable $date = new DateTimeImmutable('now', new DateTimeZone('Australia/Melbourne')),
         public ?Format $format = null,
         public ?string $externalLink = null,
     ) {

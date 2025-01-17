@@ -32,9 +32,13 @@ readonly class Url
 
         $path = substr($page->file, strlen($resourcesDirectory));
 
-        ['dirname' => $directory, 'filename' => $file] = pathinfo($path);
+        $pathInfo = pathinfo($path);
 
-        return $this->to("{$directory}/{$file}");
+        if (! isset($pathInfo['dirname'])) {
+            throw new RuntimeException("Unable to determine directory path for [{$page->file}].");
+        }
+
+        return $this->to("{$pathInfo['dirname']}/{$pathInfo['filename']}");
     }
 
     public function asset(string $path): string

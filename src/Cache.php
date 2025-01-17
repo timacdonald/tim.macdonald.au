@@ -8,7 +8,6 @@ readonly class Cache
 {
     public function __construct(
         public string $projectBase,
-        public bool $production,
     ) {
         //
     }
@@ -16,17 +15,13 @@ readonly class Cache
     public function __invoke(string $path, Response $response): Response
     {
         return $response->decorate(function ($response) use ($path): string {
-            if (! $this->production) {
-                return $response->render();
-            }
-
             $path = "{$this->projectBase}/public{$path}/index.html";
 
             $content = is_file($path)
                 ? file_get_contents($path)
                 : false;
 
-            if ($content === false || ! $this->production) {
+            if ($content === false) {
                 if (! is_dir($directory = dirname($path))) {
                     $result = mkdir($directory, permissions: 0755, recursive: true);
 
