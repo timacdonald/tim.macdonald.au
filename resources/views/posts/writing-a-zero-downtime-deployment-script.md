@@ -86,7 +86,7 @@ If you've been working with Git for a while, this step is what you've probably d
 
 To make this magic happen, we will first need to get the repository URL from GitHub:
 
-![GitHub repository URL]({{ url('images/posts/github-repository-url.png') }} )
+![GitHub repository URL](<?php $e($url->asset('github-repository-url.png')); ?>)
 
 and then run the following shell commands:
 
@@ -275,7 +275,7 @@ ln -s -n -f $DEPLOYMENT_DIRECTORY/$REPOSITORY_PUBLIC_DIRECTORY_PATH $SERVER_PUBL
 ...
 ```
 
-Well you made it this far, so it you'd like to discuss anything about the article, or criticize my lack of knowledge, please feel free to hit me up on [Twitter]({{ $page->profiles['twitter'] }}).
+Well you made it this far, so it you'd like to discuss anything about the article, or criticize my lack of knowledge, please feel free to hit me up on [Twitter](https://twitter.com/timacdonald87).
 
 ## Update
 

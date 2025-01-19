@@ -10,12 +10,13 @@
  * @var \TiMacDonald\Website\Url $url
  * @var (callable(string): void) $e
  * @var \TiMacDonald\Website\Markdown $markdown
+ * @var \TiMacDonald\Website\Template $template
  * @var \TiMacDonald\Website\Collection $collection
  */
 
 use TiMacDonald\Website\Format;
 
-require "{$projectBase}/resources/views/templates/head.php"; ?>
+$template('head', ['page' => $page]); ?>
 <article class="flex justify-center flex-grow px-6">
     <div class="w-full max-w-xl">
         <header class="mt-12 md:mt-16">
@@ -47,4 +48,4 @@ require "{$projectBase}/resources/views/templates/head.php"; ?>
         </div>
     </div>
 </article>
-<?php require "{$projectBase}/resources/views/templates/foot.php"; ?>
+<?php $template('foot'); ?>

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use TiMacDonald\Website\Cache;
+use TiMacDonald\Website\Capture;
 use TiMacDonald\Website\Collection;
 use TiMacDonald\Website\E;
 use TiMacDonald\Website\ErrorHandling;
@@ -11,6 +12,7 @@ use TiMacDonald\Website\Markdown;
 use TiMacDonald\Website\Renderer;
 use TiMacDonald\Website\Request;
 use TiMacDonald\Website\Response;
+use TiMacDonald\Website\Template;
 use TiMacDonald\Website\Url;
 
 /*
@@ -51,10 +53,13 @@ $request = new Request(
     path: '/'.trim($_SERVER['REQUEST_URI'] ?? '', '/'),
 );
 
-/**
- * Create collection helper...
+/*
+ * Create the template helpers...
  */
-$collection = new Collection($projectBase, $props = static fn () => [
+
+$capture = new Capture;
+
+$template = new Template($projectBase, $props = static fn () => [
     'projectBase' => $projectBase,
     'request' => $request,
     'url' => new Url(
@@ -63,13 +68,15 @@ $collection = new Collection($projectBase, $props = static fn () => [
     ),
     'e' => new E,
     'markdown' => new Markdown,
+    'capture' => $capture,
 ]);
 
-/*
- * Create renderer...
- */
+$collection = new Collection($projectBase, $capture, $props = static fn () => [
+    ...$props(),
+    'template' => $template,
+]);
 
-$render = new Renderer($projectBase, static fn () => [
+$render = new Renderer($projectBase, $capture, static fn () => [
     ...$props(),
     'collection' => $collection,
 ]);

@@ -10,9 +10,12 @@
  * @var \TiMacDonald\Website\Url $url
  * @var (callable(string): void) $e
  * @var \TiMacDonald\Website\Markdown $markdown
+ * @var \TiMacDonald\Website\Template $template
  * @var \TiMacDonald\Website\Collection $collection
  */
 
-require "{$projectBase}/resources/views/templates/head.php";
+// ...
+
+$template('head', ['page' => $page]);
 echo $content;
-require "{$projectBase}/resources/views/templates/foot.php";
+$template('foot');

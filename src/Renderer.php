@@ -3,13 +3,12 @@
 namespace TiMacDonald\Website;
 
 use Closure;
-use RuntimeException;
-use Throwable;
 
 readonly class Renderer
 {
     public function __construct(
         private string $projectBase,
+        private Capture $capture,
         private Closure $props,
     ) {
         //
@@ -26,55 +25,33 @@ readonly class Renderer
             throw HttpException::notFound();
         }
 
-        $__props = $props;
-
-        return new Response(function () use ($__path, $__props): string {
-            $__props = [
-                ...$__props,
+        return new Response(function () use ($__path, $props): string {
+            $props = [
+                ...$props,
                 ...call_user_func($this->props),
             ];
 
-            extract($__props);
-
-            try {
-                if (! ob_start()) {
-                    throw new RuntimeException('Unable to start output buffering.');
-                }
+            [$content, $page] = call_user_func($this->capture, static function () use ($__path, $props): ?Page {
+                extract($props);
+                unset($props);
 
                 require $__path;
 
-                $content = ob_get_clean();
+                return $page ?? null;
+            });
 
-                if ($content === false) {
-                    throw new RuntimeException('Unable to get the output buffer contents.');
-                }
-            } catch (Throwable $e) {
-                ob_end_clean();
-
-                throw $e;
-            }
-
-            if (! isset($page)) {
+            if ($page === null) {
                 return $content;
             }
 
-            try {
-                if (! ob_start()) { // @phpstan-ignore booleanNot.alwaysFalse
-                    throw new RuntimeException('Unable to start output buffering.');
-                }
+            $props = call_user_func($this->props);
 
-                require "{$this->projectBase}/resources/views/templates/{$page->template->value}.php";
+            [$content] = call_user_func($this->capture, function () use ($props, $page, $content) {
+                extract($props);
+                unset($props);
 
-                $content = ob_get_clean();
-
-                if ($content === false) {
-                    throw new RuntimeException('Unable to get the output buffer contents.');
-                }
-            } catch (Throwable $e) {
-                ob_end_clean();
-
-                throw $e;
-            }
+                require "{$this->projectBase}/resources/views/templates/{$page->template}.php";
+            });
 
             return $content;
         });

@@ -9,6 +9,7 @@ readonly class Collection
 {
     public function __construct(
         private string $projectBase,
+        private Capture $capture,
         private Closure $props,
     ) {
         //
@@ -20,32 +21,30 @@ readonly class Collection
      */
     public function __invoke(string $name, array $props = []): array
     {
-        $__props = $props;
-
         $paths = glob("{$this->projectBase}/resources/views/{$name}/*");
 
         if ($paths === false) {
             throw new RuntimeException("Unable to glob for collection [{$name}].");
         }
 
-        $collection = array_map(function (string $path) use ($__props): ?Page {
-            $__props = [
-                ...$__props,
+        $collection = array_map(function (string $__path) use ($props): ?Page {
+            $props = [
+                ...$props,
                 ...call_user_func($this->props),
-                'collection' => new Collection($this->projectBase, $this->props),
+                'collection' => $this,
             ];
 
-            extract($__props);
+            [, $page] = call_user_func($this->capture, static function () use ($__path, $props): ?Page {
+                extract($props);
+                unset($props);
 
-            if (! ob_start()) {
-                throw new RuntimeException('Unable to start output buffering.');
-            }
+                require $__path;
 
-            require $path;
-            ob_end_clean();
+                return $page ?? null;
+            });
 
-            if (! isset($page) || ! ($page instanceof Page)) {
-                throw new RuntimeException("Did not find Page in [{$path}].");
+            if ($page === null) {
+                throw new RuntimeException("Did not find Page in [{$__path}].");
             }
 
             if ($page->hidden) {
