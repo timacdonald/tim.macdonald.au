@@ -34,11 +34,7 @@ readonly class Url
 
         $pathInfo = pathinfo($path);
 
-        if (! isset($pathInfo['dirname'])) {
-            throw new RuntimeException("Unable to determine directory path for [{$page->file}].");
-        }
-
-        return $this->to("{$pathInfo['dirname']}/{$pathInfo['filename']}");
+        return $this->to("{$pathInfo['filename']}");
     }
 
     public function asset(string $path): string

@@ -279,7 +279,7 @@ Just to wrap up what we've done:
 3. Built our own Backup command that wraps the underlying package command.
 4. Setup our schedule to run the backups at specific intervals.
 
-If you would like to see a more comprehensive version that also supports running, cleaning, monitoring, and listing your backups with the approach, you can [check out the package I put together](/backup-multiple-sites-frameworks-laravel-backup/). But please remember to also monitor your backups from a separate server isolated from your backup location!
+If you would like to see a more comprehensive version that also supports running, cleaning, monitoring, and listing your backups with the approach, you can [check out the package I put together](<?php $e($url->to('/backup-multiple-sites-frameworks-laravel-backup')); ?>). But please remember to also monitor your backups from a separate server isolated from your backup location!
 
 Well it has been a blast getting here. I love the simplicity of this solution to have a single app running my backups on my server. Feels gooooood. Oh yea...the server. Well, if you've come this far you might as well hang around while we get the schedule running on the server....right?!?
 

@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 
-use TiMacDonald\Website\Cache;
+use TiMacDonald\Website\CachedCollection;
+use TiMacDonald\Website\CachedResponse;
 use TiMacDonald\Website\Capture;
 use TiMacDonald\Website\Collection;
 use TiMacDonald\Website\E;
@@ -54,18 +55,20 @@ $request = new Request(
 );
 
 /*
- * Create the template helpers...
+ * Create services...
  */
 
 $capture = new Capture;
 
+$url = new Url(
+    base: $request->base,
+    projectBase: $projectBase,
+);
+
 $template = new Template($projectBase, $props = static fn () => [
     'projectBase' => $projectBase,
     'request' => $request,
-    'url' => new Url(
-        base: $request->base,
-        projectBase: $projectBase,
-    ),
+    'url' => $url,
     'e' => new E,
     'markdown' => new Markdown,
     'capture' => $capture,
@@ -75,6 +78,10 @@ $collection = new Collection($projectBase, $capture, $props = static fn () => [
     ...$props(),
     'template' => $template,
 ]);
+
+if ($production) {
+    $collection = new CachedCollection($projectBase, $collection);
+}
 
 $render = new Renderer($projectBase, $capture, static fn () => [
     ...$props(),
@@ -95,10 +102,10 @@ $handler = static fn (): Response => match ($request->path) {
     /*
      * Dynamic routes...
      */
-    default => (static function () use ($render, $request): Response {
-        foreach (['posts', 'talk'] as $type) {
-            if (preg_match("/^\/{$type}\/([0-9a-z\-]+)$/", $request->path, $matches) === 1) {
-                return $render("{$type}/{$matches[1]}.md");
+    default => (static function () use ($render, $request, $collection, $url): Response {
+        foreach ($collection('posts') as $post) {
+            if ($url->page($post) === $request->url()) {
+                return $render($post->file);
             }
         }
 
@@ -113,7 +120,7 @@ $handler = static fn (): Response => match ($request->path) {
 try {
     $response = $handler();
 
-    if ($response->status === 200) {
+    if ($response->status() === 200) {
         /*
          * Only allow GET or HEAD requests for known routes...
          */
@@ -125,9 +132,7 @@ try {
             /*
              * Cache known routes...
              */
-            $cache = new Cache($projectBase);
-
-            $response = $cache($request->path, $response);
+            $response = new CachedResponse($projectBase, $request, $response);
         }
     }
 } catch (HttpException $e) {
@@ -148,6 +153,6 @@ try {
 
 $body = $response->render();
 
-http_response_code($response->status);
+http_response_code($response->status());
 
 echo $body;

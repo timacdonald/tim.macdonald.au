@@ -4,8 +4,9 @@ namespace TiMacDonald\Website;
 
 use Closure;
 use RuntimeException;
+use TiMacDonald\Website\Contracts\Collection as CollectionContract;
 
-readonly class Collection
+readonly class Collection implements CollectionContract
 {
     public function __construct(
         private string $projectBase,

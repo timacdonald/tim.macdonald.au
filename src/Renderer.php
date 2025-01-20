@@ -19,13 +19,17 @@ readonly class Renderer
      */
     public function __invoke(string $path, array $props = []): Response
     {
-        $__path = "{$this->projectBase}/resources/views/{$path}";
+        return new Response(function () use ($path, $props): string {
+            $__path = realpath($path);
 
-        if (! is_file($__path)) {
-            throw HttpException::notFound();
-        }
+            if ($__path === false) {
+                $__path = realpath("{$this->projectBase}/resources/views/{$path}");
 
-        return new Response(function () use ($__path, $props): string {
+                if ($__path === false) {
+                    throw HttpException::notFound();
+                }
+            }
+
             $props = [
                 ...$props,
                 ...call_user_func($this->props),
