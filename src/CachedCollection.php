@@ -35,4 +35,3 @@ class CachedCollection
         return $collection;
     }
 }
-

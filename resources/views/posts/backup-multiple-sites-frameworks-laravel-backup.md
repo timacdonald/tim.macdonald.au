@@ -279,7 +279,7 @@ Just to wrap up what we've done:
 3. Built our own Backup command that wraps the underlying package command.
 4. Setup our schedule to run the backups at specific intervals.
 
-If you would like to see a more comprehensive version that also supports running, cleaning, monitoring, and listing your backups with the approach, you can [check out the package I put together](<?php $e($url->to('/backup-multiple-sites-frameworks-laravel-backup')); ?>). But please remember to also monitor your backups from a separate server isolated from your backup location!
+If you would like to see a more comprehensive version that also supports running, cleaning, monitoring, and listing your backups with the approach, you can [check out the package I put together](https://github.com/timacdonald/multisite-backup-command)). But please remember to also monitor your backups from a separate server isolated from your backup location!
 
 Well it has been a blast getting here. I love the simplicity of this solution to have a single app running my backups on my server. Feels gooooood. Oh yea...the server. Well, if you've come this far you might as well hang around while we get the schedule running on the server....right?!?
 
@@ -287,11 +287,11 @@ Well it has been a blast getting here. I love the simplicity of this solution to
 
 We are going to create a site on the server – using [Laravel Forge](https://forge.laravel.com) – that isn't reachable by the outside world i.e. I'm not going to register a domain for it. My servers name is `breezy-thunder`, so I'm going to create a site named `app.breezy-thunder`.
 
-![create new site in forge ui]({{ url('images/posts/create-new-site-in-forge.png') }})
+![create new site in forge ui](<?php $e($url->asset('create-new-site-in-forge.png')); ?>)
 
 Put the app we just built into version control and get it deployed to the server (I'm not going to cover this here - there are lots of great articles out there already covering this). Once deployed to your server, add a CRON job to make sure the schedule runs.
 
-![add cron job in forge ui]({{ url('images/posts/add-cron-job-in-forge.png') }})
+![add cron job in forge ui](<?php $e($url->asset('add-cron-job-in-forge.png')); ?>)
 
 ## Final thoughts
 

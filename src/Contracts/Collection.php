@@ -12,4 +12,3 @@ interface Collection
      */
     public function __invoke(string $name, array $props = []): array;
 }
-

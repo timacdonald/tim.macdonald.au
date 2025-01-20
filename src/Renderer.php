@@ -17,19 +17,19 @@ readonly class Renderer
     /**
      * @param  array<string, mixed>  $props
      */
-    public function __invoke(string $path, array $props = []): Response
+    public function __invoke(string $path, array $props = [], int $status = 200): Response
     {
-        return new Response(function () use ($path, $props): string {
-            $__path = realpath($path);
+        $__path = realpath($path);
+
+        if ($__path === false) {
+            $__path = realpath("{$this->projectBase}/resources/views/{$path}");
 
             if ($__path === false) {
-                $__path = realpath("{$this->projectBase}/resources/views/{$path}");
-
-                if ($__path === false) {
-                    throw HttpException::notFound();
-                }
+                throw HttpException::notFound();
             }
+        }
 
+        return new Response(function () use ($__path, $props): string {
             $props = [
                 ...$props,
                 ...call_user_func($this->props),
@@ -58,6 +58,6 @@ readonly class Renderer
             });
 
             return $content;
-        });
+        }, status: $status);
     }
 }

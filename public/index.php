@@ -120,20 +120,18 @@ $handler = static fn (): Response => match ($request->path) {
 try {
     $response = $handler();
 
-    if ($response->status() === 200) {
-        /*
-         * Only allow GET or HEAD requests for known routes...
-         */
-        if (! in_array($_SERVER['REQUEST_METHOD'], ['GET', 'HEAD'], strict: true)) {
-            throw HttpException::methodNotAllowed();
-        }
+    /*
+     * Only allow GET or HEAD requests for known routes...
+     */
+    if (! in_array($_SERVER['REQUEST_METHOD'], ['GET', 'HEAD'], strict: true)) {
+        throw HttpException::methodNotAllowed();
+    }
 
-        if ($production) {
-            /*
-             * Cache known routes...
-             */
-            $response = new CachedResponse($projectBase, $request, $response);
-        }
+    if ($production) {
+        /*
+         * Cache known routes...
+         */
+        $response = new CachedResponse($projectBase, $request, $response);
     }
 } catch (HttpException $e) {
     /*
@@ -141,7 +139,7 @@ try {
      */
     $response = $render('error.php', [
         'message' => $e->getMessage(),
-    ])->withStatus($e->status);
+    ], $e->status);
 }
 
 /*

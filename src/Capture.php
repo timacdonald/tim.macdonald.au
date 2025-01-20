@@ -30,4 +30,3 @@ class Capture
         return [$content, $returnValue];
     }
 }
-

@@ -2,7 +2,6 @@
 
 namespace TiMacDonald\Website;
 
-use Closure;
 use RuntimeException;
 use TiMacDonald\Website\Contracts\Response;
 
@@ -46,23 +45,5 @@ readonly class CachedResponse implements Response
         }
 
         return $content;
-    }
-
-    public function withStatus(int $status): self
-    {
-        return new self(
-            $this->projectBase,
-            $this->request,
-            $this->response->withStatus($status),
-        );
-    }
-
-    public function decorate(Closure $callback): self
-    {
-        return new self(
-            $this->projectBase,
-            $this->request,
-            $this->response->decorate($callback),
-        );
     }
 }
