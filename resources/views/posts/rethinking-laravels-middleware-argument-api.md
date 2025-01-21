@@ -320,7 +320,7 @@ Route::stuff()
 
 Now that was a pretty long blog post just to introduce a package, but I wanted to run you through the journey, as that is always more exciting than the destination. I think there is still places to go with this, but it would possibly require some buy in from the framework. I'd love to push this futher any allow the values to be serialized so that the middleware receives the original types, i.e. if you pass `true` you get that value, not `"1"`.
 
-For now that is the end of the journey. I enjoyed pushing this idea to an extreme to see what came out the otherside. If you like the idea of this, take it for a spin. I'd love to hear your thoughts on [Twitter]({{ $page->profiles['twitter'] }}).
+For now that is the end of the journey. I enjoyed pushing this idea to an extreme to see what came out the otherside. If you like the idea of this, take it for a spin. I'd love to hear your thoughts on [Twitter](https://twitter.com/timacdonald87).
 
 ## Links
 

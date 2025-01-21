@@ -64,7 +64,7 @@ This will allow me to see the request that was made (although not the entire req
 
 Open up the **site** and scroll down to the **files** button and edit the **Nginx Configuration**.
 
-![files button showing popup menu with edit nginx configuration option showing]({{ url('images/posts/performance-monitoring-files-button.png') }})
+![files button showing popup menu with edit nginx configuration option showing](<?php $e($url->asset('performance-monitoring-files-button.png')); ?>)
 
 At the top of the config, **after** the `include forge-conf/...` statement and **before** the `server {` block, add the logging format as shown below.
 

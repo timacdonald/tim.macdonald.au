@@ -105,7 +105,7 @@ Route::middleware(MyMiddleware::class)->group(function () {
 
 When we access this page we see the following output rendered in the browser. You will notice that the dump is only seen once, indicating that Laravel has removed the duplicate middleware from the stack.
 
-![Browser screenshot showing the middleware output being rendered only once]({{ url('images/posts/middleware-running-once.png') }})
+![Browser screenshot showing the middleware output being rendered only once](<?php $e($url->asset('middleware-running-once.png')); ?>)
 
 So cleaning this up was about aesthetics and consistency - or so I thought!
 
@@ -132,11 +132,11 @@ Laravel ships with an artisan command that displays all routes defined within th
 
 The bare command, `php artisan route:list`, will show you the routes.
 
-![Terminal output showing the result of running the "php artisan route:list" command on a fresh Laravel Breeze application]({{ url('images/posts/breeze-route-list.png') }})
+![Terminal output showing the result of running the "php artisan route:list" command on a fresh Laravel Breeze application](<?php $e($url->asset('breeze-route-list.png')); ?>)
 
 But this doesn’t show the route middleware. Using the verbose flag, `php artisan route:list -v`, will show middleware for each route.
 
-![Terminal output showing the result of running the "php artisan route:list -v" command on a fresh Laravel Breeze application]({{ url('images/posts/breeze-route-list-verbose.png') }})
+![Terminal output showing the result of running the "php artisan route:list -v" command on a fresh Laravel Breeze application](<?php $e($url->asset('breeze-route-list-verbose.png')); ?>)
 
 Great! We are getting somewhere useful! I then remembered that a `--json` flag was available on the command to output a JSON representation of the routes and their middleware instead of the visual representation we see in the terminal.
 
@@ -215,7 +215,7 @@ kitty +kitten diff before.json after.json
 
 The result was something that look liked the following...
 
-![Diff of the before and after JSON route files]({{ url('images/posts/route-diff.png') }})
+![Diff of the before and after JSON route files](<?php $e($url->asset('route-diff.png')); ?>)
 
 This gave me a way to visualise, with precision, the differences between each route's middleware before and after the change and detect inconsistecies.
 

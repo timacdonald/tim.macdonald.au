@@ -3,6 +3,7 @@
 namespace TiMacDonald\Website;
 
 use Closure;
+use RuntimeException;
 
 readonly class Renderer
 {
@@ -19,17 +20,17 @@ readonly class Renderer
      */
     public function __invoke(string $path, array $props = [], int $status = 200): Response
     {
-        $__path = realpath($path);
-
-        if ($__path === false) {
-            $__path = realpath("{$this->projectBase}/resources/views/{$path}");
+        return new Response(function () use ($path, $props): string {
+            $__path = realpath($path);
 
             if ($__path === false) {
-                throw HttpException::notFound();
-            }
-        }
+                $__path = realpath("{$this->projectBase}/resources/views/{$path}");
 
-        return new Response(function () use ($__path, $props): string {
+                if ($__path === false) {
+                    throw new RuntimeException("Unable to find path [{$path}].");
+                }
+            }
+
             $props = [
                 ...$props,
                 ...call_user_func($this->props),
@@ -50,7 +51,7 @@ readonly class Renderer
 
             $props = call_user_func($this->props);
 
-            [$content] = call_user_func($this->capture, function () use ($props, $page, $content) {
+            [$content] = call_user_func($this->capture, function () use ($props, $page, $content) { // @phpstan-ignore closure.unusedUse
                 extract($props);
                 unset($props);
 

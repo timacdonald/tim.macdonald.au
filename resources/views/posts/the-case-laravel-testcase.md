@@ -82,7 +82,7 @@ The build script generated 100 test classes, and each of those classes contains 
 
 This was on PHP 7.2.19 without Xdebug on the following machine.
 
-![Macbook Pro Retina 2012. Operating system: macOS 10.14.5. Processor: 2.3 GHz Intel Core i7. Memory: 8 GB 1600 MHz DDR3.]({{ url('images/posts/system-report.png') }})
+![Macbook Pro Retina 2012. Operating system: macOS 10.14.5. Processor: 2.3 GHz Intel Core i7. Memory: 8 GB 1600 MHz DDR3.](<?php $e($url->asset('system-report.png')); ?>)
 
 I was worried my machine would have a big impact on these results, so I [asked on Twitter](https://twitter.com/timacdonald87/status/1144067916146462720) and in the PHP Australia slack channel if others would be kind enough run the suite as well. [Jordan suggested](https://twitter.com/jordanpittman/status/1144070900947607557) it might also be good to repeat the suite a few times to account for PHPUnit's startup time.
 
@@ -205,7 +205,7 @@ It is important to keep in mind that this won’t translate to a huge payoff in 
 
 ### Where to from here
 
-I'll keep this post updated - and probably [yell about it a bit on Twitter]({{ $page->profiles['twitter'] }}) as well, so if you have any interest in keeping up with the status of the PRs (or if they aren't suitable, the package) check back soon.
+I'll keep this post updated - and probably [yell about it a bit on Twitter](https://twitter.com/timacdonald87) as well, so if you have any interest in keeping up with the status of the PRs (or if they aren't suitable, the package) check back soon.
 
 **Update 1**: Just submitted the Pull Requests. Would love any feedback you have on the implementation! [Check them out](https://github.com/laravel/framework/pull/28998).
 

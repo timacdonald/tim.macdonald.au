@@ -542,4 +542,4 @@ Hopefully you've found this approach interesting. I don't think you should reach
 
 You should always consider if this technique is appropriate for you application, your team, and your programming style before implementing the refactor.
 
-If you have any questions or thoughts on any of these ideas I would love to chat - [reach out on Twitter]({{ $page->profiles['twitter'] }}) anytime.
+If you have any questions or thoughts on any of these ideas I would love to chat - [reach out on Twitter](https://twitter.com/timacdonald87) anytime.

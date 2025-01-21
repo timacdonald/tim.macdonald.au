@@ -13,6 +13,9 @@ class Template
         //
     }
 
+    /**
+     * @param  array<string, mixed>  $props
+     */
     public function __invoke(string $name, array $props = []): void
     {
         $__path = "{$this->projectBase}/resources/views/templates/{$name}.php";

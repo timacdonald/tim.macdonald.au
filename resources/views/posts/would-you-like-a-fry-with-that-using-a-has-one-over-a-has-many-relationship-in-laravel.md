@@ -30,7 +30,7 @@ When you are working with a one-to-many relationship, it is sometimes the case t
 
 The idea of this unique relation over a `HasMany` relationship can be visualised as shown below in the example of a user having many payment methods (e.g., multiple credit cards), however only one payment method can ever be the "default" payment method at any given time.
 
-![Visual representation showing one user on the left and many payment methods on the right - which only one connection between a user and a payment method highlighted]({{ url('images/posts/default-payment-method.png') }})
+![Visual representation showing one user on the left and many payment methods on the right - which only one connection between a user and a payment method highlighted](<?php $e($url->asset('default-payment-method.png')); ?>)
 
 For our example, we are have a "state" column on the payment method table, which can hold a few different values such as `"available"`, `"default"`, `"expired"`, and `"disabled"`.
 
