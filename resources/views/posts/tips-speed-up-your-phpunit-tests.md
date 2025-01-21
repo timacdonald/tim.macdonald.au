@@ -22,9 +22,8 @@ $page = Page::fromPost(
     description: "Having a fast test suite can be just as important as having a fast application. Here are some ways to make your test suite run faster.",
     date: new DateTimeImmutable('@1546956000', new DateTimeZone('Australia/Melbourne')),
     image: $url->asset('laravel-testcase.png'),
-    externalLink: 'https://laravel-news.com/tips-to-speed-up-phpunit-tests',
 );
 
 ?>
 
-Read the full article on [Laravel News](https://laravel-news.com/tips-to-speed-up-phpunit-tests).
+Read the full guest article on [Laravel News](https://laravel-news.com/tips-to-speed-up-phpunit-tests).

@@ -33,7 +33,7 @@ We start with a `Company` model. There is no UI for adding or deleting a company
 Using Laravel Mix I publish their logo to `/public/images/logos/{resource_key}.png`, meaning I call the asset with the mix helper like so...
 
 ```html
-<img src='@{{ url('images/logos/{$company->resource_key}.png') }}' alt='...' height='200' width='200'>
+<img src='{{ url("images/logos/{$company->resource_key}.png") }}' alt='...' height='200' width='200'>
 ```
 
 So far so good, right? But what happens when we go to test this? Why don't we setup a factory and a test and see where I was hitting a wall.

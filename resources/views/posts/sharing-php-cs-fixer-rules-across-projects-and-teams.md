@@ -22,7 +22,6 @@ $page = Page::fromPost(
     description: "This tutorial will show you how you can setup a repo that contains all your rules, and easily share them with others.",
     date: new DateTimeImmutable('@1588086000', new DateTimeZone('Australia/Melbourne')),
     image: $url->asset('rethinking-middleware.png'),
-    externalLink: 'https://laravel-news.com/sharing-php-cs-fixer-rules-across-projects-and-teams',
 );
 
 ?>

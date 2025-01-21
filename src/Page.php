@@ -17,7 +17,6 @@ readonly class Page
         public OgType $ogType = OgType::Website,
         public DateTimeImmutable $date = new DateTimeImmutable('now', new DateTimeZone('Australia/Melbourne')),
         public ?Format $format = null,
-        public ?string $externalLink = null,
     ) {
         //
     }
@@ -32,7 +31,6 @@ readonly class Page
         string $template = 'post',
         OgType $ogType = OgType::Article,
         Format $format = Format::Article,
-        ?string $externalLink = null,
     ): self {
         return new self(
             file: $file,
@@ -43,7 +41,6 @@ readonly class Page
             hidden: $hidden,
             template: $template,
             ogType: $ogType,
-            externalLink: $externalLink,
         );
     }
 }

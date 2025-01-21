@@ -26,12 +26,12 @@ $page = Page::fromPost(
 
 ?>
 
-@component('_partials.update')
+<?php $template('update', ['content' => $capture(function () use ($e, $url) { ?>
     I gave a talk on this topic at LaraconAU, 2019. It covers all the ways custom collections can improve your systems design and contains some more guidance on when you would reach for this pattern.
     <p>
-        Check it out the <a href="https://2019.laracon.au/speakers/tim-macdonald">video</a> and <a href="{{ $page->baseUrl }}/talks/expressive-eloquent-collections/" data-turbolinks="false">slides</a>
+        Check it out the <a href="https://2019.laracon.au/speakers/tim-macdonald">video</a> and <a href="<?php $e($url->to('talks/expressive-eloquent-collections')); ?>">slides</a>
     </p>
-@endcomponent
+<?php })[0]]); ?>
 
 When working with eloquent models I am always adding methods to make the code speak the _domain language_. If an invoice is able to be paid I would generally have an `→isPaid()` method and an inverse `→isNotPaid()` method, and I would usually have corresponding query scopes as well.
 

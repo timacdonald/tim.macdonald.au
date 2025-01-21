@@ -22,9 +22,8 @@ $page = Page::fromPost(
     description: "In applications it is often useful to have a way to store some global settings. This post outlines my approach using a Spatie package to manage the values instead of Eloquent.",
     date: new DateTimeImmutable('@1543327200', new DateTimeZone('Australia/Melbourne')),
     image: $url->asset('collection-voices.png'),
-    externalLink: 'https://laravel-news.com/global-application-settings',
 );
 
 ?>
 
-Read the full article on [Laravel News]({{ $page->external_link }}).
+Read the full guest article on [Laravel News](https://laravel-news.com/global-application-settings).
