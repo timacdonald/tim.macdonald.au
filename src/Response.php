@@ -26,18 +26,4 @@ readonly class Response implements ResponseContract
     {
         return call_user_func($this->callback);
     }
-
-    public function send(): void
-    {
-        /*
-         *
-         * TODO what to do with HEAD requests?
-         * TODO additional headers?
-         */
-        $body = $this->render();
-
-        http_response_code($this->status());
-
-        echo $body;
-    }
 }

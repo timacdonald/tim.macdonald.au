@@ -66,6 +66,7 @@ $url = new Url(
 );
 
 $template = new Template($projectBase, $props = static fn () => [
+    'theme' => '#5f40f6',
     'projectBase' => $projectBase,
     'request' => $request,
     'url' => $url,
@@ -146,4 +147,12 @@ try {
  * Send the response...
  */
 
-$response->send();
+/*
+ * TODO what to do with HEAD requests?
+ * TODO additional headers?
+ */
+$body = $response->render();
+
+http_response_code($response->status());
+
+echo $body;

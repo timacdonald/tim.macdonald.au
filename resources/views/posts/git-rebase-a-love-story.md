@@ -27,7 +27,10 @@ $page = Page::fromPost(
 
 ?>
 
-@include('_partials.youtube_video', ['id' => 'INjj0eGhNXs'])
+<?php $template('youtube', [
+    'id' => 'INjj0eGhNXs',
+    'aspectClass' => 'aspect-[calc(768/480)]',
+]); ?>
 
 <div class="text-center mt-4">
     <a href="https://timacdonald.notion.site/git-rebase-a-love-story-d6f158ca41014725a39c98e1c32cbbd5">

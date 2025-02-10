@@ -61,10 +61,10 @@ use TiMacDonald\Website\OgType;
         <link rel="apple-touch-icon" sizes="180x180" href="<?php $e($url->asset('apple-touch-icon.png')); ?>">
         <link rel="icon" type="image/png" sizes="32x32" href="<?php $e($url->asset('favicon-32x32.png')); ?>">
         <link rel="icon" type="image/png" sizes="16x16" href="<?php $e($url->asset('favicon-16x16.png')); ?>">
-        <link rel="mask-icon" color="#5f40f6" href="<?php $e($url->asset('safari-pinned-tab.svg')); ?>">
+        <link rel="mask-icon" color="<?php $e($theme); ?>" href="<?php $e($url->asset('safari-pinned-tab.svg')); ?>">
         <link rel="shortcut icon" href="<?php $e($url->asset('favicon.ico')); ?>">
-        <meta name="msapplication-TileColor" content="#5f40f6">
-        <meta name="theme-color" content="#5f40f6">
+        <meta name="msapplication-TileColor" content="<?php $e($theme); ?>">
+        <meta name="theme-color" content="<?php $e($theme); ?>">
     </head>
     <body class="flex flex-col min-h-screen">
         <div class="h-2 bg-purple-500 dark:bg-purple-400"></div>
