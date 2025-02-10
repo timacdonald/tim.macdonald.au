@@ -26,4 +26,4 @@ $page = Page::fromPost(
 
 ?>
 
-Read the full article on [Laravel News]({{ $page->external_link }}).
+Read the full article on [Laravel News](https://laravel-news.com/sharing-php-cs-fixer-rules-across-projects-and-teams).
