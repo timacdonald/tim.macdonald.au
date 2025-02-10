@@ -144,13 +144,6 @@ try {
 
 /*
  * Send the response...
- *
- * TODO what to do with HEAD requests?
- * TODO additional headers?
  */
 
-$body = $response->render();
-
-http_response_code($response->status());
-
-echo $body;
+$response->send();
