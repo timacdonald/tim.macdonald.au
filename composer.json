@@ -1,7 +1,7 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
     "require": {
-        "php": "8.3.*",
+        "php": "8.4.*",
         "michelf/php-markdown": "^2.0"
     },
     "autoload": {
@@ -10,14 +10,14 @@
         }
     },
     "scripts": {
+        "dev": [
+            "@putenv LOCAL=1",
+            "npm ci",
+            "composer install",
+            "npx concurrently -c \"#93c5fd,#fdba74\" \"npx vite build --watch\" \"php -S 127.0.0.1:8000 --docroot public\" \"open http://127.0.0.1:8000\" --names=server,vite,open"
+        ],
         "deploy": [
-            "@build",
-            "@flush"
-        ],
-        "build": [
-            "npm run build"
-        ],
-        "flush": [
+            "npx vite build",
             "gfind -maxdepth 2 -type d -path './public/*' -not -path './public/assets' > files.txt",
             "gfind -maxdepth 2 -type f -path './public/*.html' >> files.txt",
             "gfind -maxdepth 2 -type f -path './cache/*.php' >> files.txt",
