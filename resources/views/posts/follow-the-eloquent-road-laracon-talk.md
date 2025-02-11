@@ -27,10 +27,10 @@ $page = Page::fromPost(
 
 ?>
 
-@include('_partials.vimeo_video', ['id' => 452363091])
+<?php $template('vimeo', ['id' => '452363091']); ?>
 
 <div class="text-center mt-4">
-    <a href="{{ $page->baseUrl }}/talks/follow-the-eloquent-road">
+    <a href="<?php $e($url->to('talks/follow-the-eloquent-road')); ?>">
         Talk slides
     </a>
 </div>

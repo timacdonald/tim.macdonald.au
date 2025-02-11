@@ -27,6 +27,6 @@ $page = Page::fromPost(
 
 ?>
 
-@include('_partials.vimeo_video', ['id' => 426674162])
+<?php $template('vimeo', ['id' => '426674162']); ?>
 
 In this video we look at how you can avoid false positives in your tests by making use of magic values. I'll show you some tests that seem to be passing, but in fact are a false positive. We refactor the tests to utilise magic values and fix the code to make sure our now failing tests pass ✅
