@@ -45,13 +45,21 @@ $production = ! getenv('LOCAL');
 
 /*
  * Capture request...
- *
- * TODO: strip "index.html" from the path for when the cached file does not yet exist.
  */
+
+$path = $_SERVER['REQUEST_URI'] ?? '';
+
+$path = explode('?', $path, 2)[0] ?? $path;
+
+if (str_ends_with($path, '/index.html')) {
+    $path = substr($path, 0, -10);
+}
+
+$path = '/'.trim($path, '/');
 
 $request = new Request(
     base: $production ? 'https://tim.macdonald.au' : 'http://'.$_SERVER['HTTP_HOST'],
-    path: '/'.trim($_SERVER['REQUEST_URI'] ?? '', '/'),
+    path: $path,
 );
 
 /*
@@ -89,6 +97,14 @@ $render = new Renderer($projectBase, $capture, static fn () => [
     'collection' => $collection,
 ]);
 
+$redirect = static fn (string $location) => new Response(
+    callback: fn () => '',
+    status: 307,
+    headers: [
+        'Location' => $location,
+    ],
+);
+
 /*
  * Generate request handler...
  */
@@ -98,7 +114,7 @@ $handler = static fn (): Response => match ($request->path) {
      * Static routes...
      */
     '/' => $render('home.php'),
-    '/about' => $render('about.php'),
+    '/about' => $redirect($url->to('/')),
 
     /*
      * Dynamic routes...
@@ -128,7 +144,7 @@ try {
         throw HttpException::methodNotAllowed();
     }
 
-    if ($production) {
+    if ($production && $response->status() < 300) {
         /*
          * Cache known routes...
          */
@@ -144,15 +160,28 @@ try {
 }
 
 /*
+ * Resolve the response...
+ */
+
+$body = $response->render();
+
+$status = $response->status();
+
+$headers = [
+    'Content-Length' => strlen($body),
+    ...$response->headers(),
+];
+
+/*
  * Send the response...
  */
 
-/*
- * TODO what to do with HEAD requests?
- * TODO additional headers?
- */
-$body = $response->render();
+http_response_code($status);
 
-http_response_code($response->status());
+foreach ($headers as $key => $value) {
+    header("{$key}: {$value}");
+}
 
-echo $body;
+if ($_SERVER['REQUEST_METHOD'] !== 'HEAD') {
+    echo $body;
+}

@@ -18,7 +18,7 @@ use TiMacDonald\Website\OgType;
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Assets --><!-- TODO: preloads -->
+        <!-- Assets -->
         <link rel="stylesheet" href="<?php $e($url->asset('site.css')); ?>">
         <script src="<?php $e($url->asset('site.js')); ?>" async></script>
         <!-- Meta -->

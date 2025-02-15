@@ -25,7 +25,7 @@ class CachedCollection
         try {
             return require $cachePath;
         } catch (Throwable $e) {
-            // TODO log?
+            //
         }
 
         $collection = call_user_func($this->collection, $name, $props);

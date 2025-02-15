@@ -5,12 +5,14 @@ namespace TiMacDonald\Website;
 use RuntimeException;
 use TiMacDonald\Website\Contracts\Response;
 
-readonly class CachedResponse implements Response
+class CachedResponse implements Response
 {
+    private bool $cacheMiss = false;
+
     public function __construct(
-        public string $projectBase,
-        public Request $request,
-        public Response $response,
+        public readonly string $projectBase,
+        public readonly Request $request,
+        public readonly Response $response,
     ) {
         //
     }
@@ -18,6 +20,17 @@ readonly class CachedResponse implements Response
     public function status(): int
     {
         return $this->response->status();
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public function headers(): array
+    {
+        return [
+            ...$this->response->headers(),
+            'Cache-Miss' => $this->cacheMiss ? '1' : '0',
+        ];
     }
 
     public function render(): string
@@ -29,6 +42,8 @@ readonly class CachedResponse implements Response
             : false;
 
         if ($content === false) {
+            $this->cacheMiss = true;
+
             if (! is_dir($directory = dirname($path))) {
                 $result = mkdir($directory, permissions: 0755, recursive: true);
 
