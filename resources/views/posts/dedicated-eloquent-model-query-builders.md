@@ -26,7 +26,7 @@ $page = Page::fromPost(
 
 ?>
 
-This blog post is an in-depth walk though of a [tweet I sent out a few weeks ago](https://twitter.com/timacdonald87/status/1109964446766497793). You can probably get everything you need from the tweet and the comments on it, but I've written this to make it Google-able if ever needed, and to cover some caveats you should be aware of.
+This blog post is an in-depth walk though of a [tweet I sent out a few weeks ago](https://x.com/timacdonald87/status/1109964446766497793). You can probably get everything you need from the tweet and the comments on it, but I've written this to make it Google-able if ever needed, and to cover some caveats you should be aware of.
 
 Out of the box Laravel comes with a long list of conveniences and scaffolding that help developers build out web applications quickly and efficiently. One of those conveniences is the co-location of eloquent attributes, relationships, and scopes on the model class. As your application grows, more than likely your models will also grow as you add more attribute mutators, new relationships, additional query scopes, and other functionality. The model is the perfect place for these things initially, but at a point I personally find I want the ability to thin out my models.
 
@@ -442,7 +442,7 @@ public function activeOrPublic()
 }
 ```
 
-You can see this in action in [this Twitter thread](https://twitter.com/erikgaal/status/1112617973993390081) where [Erik](https://twitter.com/erikgaal) pointed this out to me. Thanks Erik!
+You can see this in action in [this Twitter thread](https://x.com/erikgaal/status/1112617973993390081) where [Erik](https://x.com/erikgaal) pointed this out to me. Thanks Erik!
 
 I personally write very small scopes that generally only have one `where` method in them. I then combine scopes at a higher level (i.e. when calling them) to get the desired groupings. This gives me more fine-grained control and reuse of my scopes.
 
@@ -542,4 +542,4 @@ Hopefully you've found this approach interesting. I don't think you should reach
 
 You should always consider if this technique is appropriate for you application, your team, and your programming style before implementing the refactor.
 
-If you have any questions or thoughts on any of these ideas I would love to chat - [reach out on Twitter](https://twitter.com/timacdonald87) anytime.
+If you have any questions or thoughts on any of these ideas I would love to chat - [reach out on Twitter](https://x.com/timacdonald87) anytime.

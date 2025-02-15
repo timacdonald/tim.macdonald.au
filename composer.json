@@ -11,10 +11,9 @@
     },
     "scripts": {
         "dev": [
-            "@putenv LOCAL=1",
-            "npm ci",
-            "composer install",
-            "npx concurrently -c \"#93c5fd,#fdba74\" \"npx vite build --watch\" \"php -S 127.0.0.1:8000 --docroot public\" \"open http://127.0.0.1:8000\" --names=server,vite,open"
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently --prefix-colors \"#93c5fd,#fdba74\" \"npm ci\" \"composer install\" --names=npm,composer",
+            "npx concurrently --prefix-colors \"#93c5fd,#fdba74\" \"npx vite build --watch\" \"LOCAL=1 php -S 127.0.0.1:8000 --docroot public\" \"open http://127.0.0.1:8000\" --names=server,vite,open"
         ],
         "deploy": [
             "npx vite build",

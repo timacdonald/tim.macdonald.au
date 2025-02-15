@@ -87,7 +87,7 @@ Keep in mind that both of these methods will hit the Stripe API. Not great for r
 
 As you would expect, we need to collect the customers credit card so we can charge them $$'s. If we don't charge them - we might not be able to afford wine! It is basically life or death at this point.
 
-On our websites frontend we will want to setup [Stripe elements](https://stripe.com/docs/stripe-js/elements/quickstart) which will tokenize the credit card. Tokenizing a credit card is a strange phrase at first, but I think it is easier to understand if you know that a token *represents* a credit card. It is a reference to the card but does not contain any information about the card i.e. the number or expiry date. Read more about [Tokenization on Wikipedia](https://en.wikipedia.org/wiki/Tokenization_(data_security)).
+On our websites frontend we will want to setup [Stripe elements](https://docs.stripe.com/payments/elements) which will tokenize the credit card. Tokenizing a credit card is a strange phrase at first, but I think it is easier to understand if you know that a token *represents* a credit card. It is a reference to the card but does not contain any information about the card i.e. the number or expiry date. Read more about [Tokenization on Wikipedia](https://en.wikipedia.org/wiki/Tokenization_(data_security)).
 
 Once we have the token we will submit *that* to our server and associate it with our Stripe customer with the following snippet:
 

@@ -22,18 +22,12 @@ $page = Page::fromPost(
     description: "Conference talk given at the 2020 LaraconUS / Online conference. Come for a journey as I show you down the path I've taken along the Eloquent road.",
     date: new DateTimeImmutable('@1613947760', new DateTimeZone('Australia/Melbourne')),
     image: $url->asset('yellow-brick.png'),
-    format: Format::Video,
+    formats: [Format::Video],
 );
 
 ?>
 
 <?php $template('vimeo', ['id' => '452363091']); ?>
-
-<div class="text-center mt-4">
-    <a href="<?php $e($url->to('talks/follow-the-eloquent-road')); ?>">
-        Talk slides
-    </a>
-</div>
 
 This talk was given at the 2020 LaraconUS / Online conference. You can find all the talks from previous years in the [Laracon Online showcase](https://vimeo.com/showcase/laracononline).
 

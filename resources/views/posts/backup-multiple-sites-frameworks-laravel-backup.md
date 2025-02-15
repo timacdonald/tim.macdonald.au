@@ -295,7 +295,7 @@ Put the app we just built into version control and get it deployed to the server
 
 ## Final thoughts
 
-- In this article I've focused on how great Laravel Backup is - but just wanted to take a chance to say that life would absolutely suck without the hard work by [Frank de Jonge](https://twitter.com/frankdejonge) to create [Flysystem](http://flysystem.thephpleague.com/). Go tell him he is awesome - "Frank - thank you - you are awesome!".
+- In this article I've focused on how great Laravel Backup is - but just wanted to take a chance to say that life would absolutely suck without the hard work by [Frank de Jonge](https://x.com/frankdejonge) to create [Flysystem](http://flysystem.thephpleague.com/). Go tell him he is awesome - "Frank - thank you - you are awesome!".
 - I've utilised S3 for my backups - but with the power of Flysystem powering the backup transfer, you can easily use this solution for other providers as well.
 - I think this should go without saying, but just in case - please make sure you don't backup to the same provider that your website is hosted with. If they go down - you could lose access to your site AND your backups.
 - Practice your backup restore. It is no good having a backup system in place only to find you forgot to include a specific folder in the backups. When you realise that - it could already be to late.

@@ -22,15 +22,19 @@ $page = Page::fromPost(
     description: "Laravel collections have become an essential part of my codebases and I couldn't imagine working without them. I have found giving collections the voice of the problem domain makes for a much nicer API when compared to the generic collection methods.",
     date: new DateTimeImmutable('@1543205093', new DateTimeZone('Australia/Melbourne')),
     image: $url->asset('collection-voices.png'),
+    formats: [Format::Article, Format::Video],
 );
 
 ?>
 
-<?php $template('update', ['content' => $capture(function () use ($e, $url) { ?>
+<?php $template('update', ['content' => $capture(static function () use ($template) { ?>
     I gave a talk on this topic at LaraconAU, 2019. It covers all the ways custom collections can improve your systems design and contains some more guidance on when you would reach for this pattern.
-    <p>
-        Check it out the <a href="https://2019.laracon.au/speakers/tim-macdonald">video</a> and <a href="<?php $e($url->to('talks/expressive-eloquent-collections')); ?>">slides</a>
-    </p>
+
+    <div class="mt-6">
+        <?php $template('youtube', [
+            'id' => '06--kezKc0Q',
+        ]) ?>
+    </div>
 <?php })[0]]); ?>
 
 When working with eloquent models I am always adding methods to make the code speak the _domain language_. If an invoice is able to be paid I would generally have an `→isPaid()` method and an inverse `→isNotPaid()` method, and I would usually have corresponding query scopes as well.

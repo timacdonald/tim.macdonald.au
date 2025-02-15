@@ -235,4 +235,4 @@ With all this in place we can slowly but surely move towards reporting each and 
 
 I can't take credit for any of this. I saw this "lottery" approach in Laravel itself and just reused it for this problem. The file based session driver uses a lottery to determine when it should clean up old session files. Check out your `config/session.php` file and you will see the lottery!
 
-Have you used a lottery for something interesting? Hit me up on <a href="https://twitter.com/timacdonald87">Twitter</a> - I'd love to hear what you've done with one in your applications.
+Have you used a lottery for something interesting? Hit me up on <a href="https://x.com/timacdonald87">Twitter</a> - I'd love to hear what you've done with one in your applications.

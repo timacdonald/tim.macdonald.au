@@ -27,7 +27,7 @@ $page = Page::fromPost(
 ?>
 Over the past year I've become more and more familiar with the terminal and (a limited set of) the commands that are possible. Swapping out GitHub Desktop app for the Git terminal commands and learning about moving around, manipulating files, VIM (read: I use Nano) and other possibilities in this new world, I was now ready to tackle something new: writing a shell script.
 
-What originally drew my attention to doing some shell scripting was hearing that Adam Wathan of [Full Stack Radio](http://www.fullstackradio.com) originally wrote [Nitpick CI](https://nitpick-ci.com), his PSR-2 coding standard app, in PHP but later converted it to shell scripts. I thought: *"Dang! I should check out some shell scripts and learn when they come in handy"*.
+What originally drew my attention to doing some shell scripting was hearing that Adam Wathan of [Full Stack Radio](http://www.fullstackradio.com) originally wrote Nitpick CI, his PSR-2 coding standard app, in PHP but later converted it to shell scripts. I thought: *"Dang! I should check out some shell scripts and learn when they come in handy"*.
 
 After putting in a bit of Googling and Stack Overflowing, I've hit the nail on the head and got my simple script running. Pretty stoked!
 
@@ -275,11 +275,11 @@ ln -s -n -f $DEPLOYMENT_DIRECTORY/$REPOSITORY_PUBLIC_DIRECTORY_PATH $SERVER_PUBL
 ...
 ```
 
-Well you made it this far, so it you'd like to discuss anything about the article, or criticize my lack of knowledge, please feel free to hit me up on [Twitter](https://twitter.com/timacdonald87).
+Well you made it this far, so it you'd like to discuss anything about the article, or criticize my lack of knowledge, please feel free to hit me up on [Twitter](https://x.com/timacdonald87).
 
 ## Update
 
-The always awesome [Matt Stauffer](https://twitter.com/stauffermatt) added a [great tip](https://twitter.com/stauffermatt/status/847564955729534976) to this. When cloning the repository, add a *depth of 1* i.e.
+The always awesome [Matt Stauffer](https://x.com/stauffermatt) added a [great tip](https://x.com/stauffermatt/status/847564955729534976) to this. When cloning the repository, add a *depth of 1* i.e.
 ```bash
 git clone --depth 1 $GIT_REPOSITORY $DEPLOYMENT_DIRECTORY
 ```

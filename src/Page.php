@@ -7,6 +7,9 @@ use DateTimeZone;
 
 readonly class Page
 {
+    /**
+     * @param  list<Format>  $formats
+     */
     public function __construct(
         public string $file,
         public string $image,
@@ -16,11 +19,14 @@ readonly class Page
         public ?string $template = 'page',
         public OgType $ogType = OgType::Website,
         public DateTimeImmutable $date = new DateTimeImmutable('now', new DateTimeZone('Australia/Melbourne')),
-        public ?Format $format = null,
+        public array $formats = [],
     ) {
         //
     }
 
+    /**
+     * @param  list<Format>  $formats
+     */
     public static function fromPost(
         string $image,
         string $title,
@@ -30,7 +36,7 @@ readonly class Page
         bool $hidden = false,
         string $template = 'post',
         OgType $ogType = OgType::Article,
-        Format $format = Format::Article,
+        array $formats = [Format::Article],
     ): self {
         return new self(
             file: $file,
@@ -41,6 +47,7 @@ readonly class Page
             hidden: $hidden,
             template: $template,
             ogType: $ogType,
+            formats: $formats,
         );
     }
 }

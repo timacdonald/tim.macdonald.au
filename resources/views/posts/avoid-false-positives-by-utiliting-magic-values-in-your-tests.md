@@ -22,7 +22,7 @@ $page = Page::fromPost(
     description: 'It can be very hard to spot a false positive within a test. So how do you avoid them?',
     date: new DateTimeImmutable('@1591581600', new DateTimeZone('Australia/Melbourne')),
     image: $url->asset('magic-values.png'),
-    format: Format::Video,
+    formats: [Format::Video],
 );
 
 ?>

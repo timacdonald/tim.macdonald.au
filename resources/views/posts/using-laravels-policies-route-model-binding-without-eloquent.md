@@ -28,7 +28,7 @@ $page = Page::fromPost(
 
 I made an assumption. I, for no reason at all, always assumed Laravel's Policy authorization and Route Model Binding functionality were only meant to be used with Eloquent models. Of course they work with Eloquent, but turns they work with any class. I wanna take a look at how and *why* you would even want to do this. Come along for the journey if that sounds interesting!
 
-# Gates vs Policies
+## Gates vs Policies
 
 Before we get into this idea, I just want to cover when I would reach for a Gate or a Policy. I like to see Gates being used for authorization of things that don't exist in the application's domain and also for one off actions (usually when your RESTful API starts to look like an RPC call). Policies on the other hand are used when you need authorization around a "thing" in your domain.
 
@@ -76,7 +76,7 @@ You should [check out the docs](https://laravel.com/docs/8.x/authorization) whic
 
 Now we've looked at what a Policy and a Gate are, I want to talk about the problem I came across in our application.
 
-# 3rd party resources
+## 3rd party resources
 
 In our app we proxy some HTTP requests to a 3rd party service. This service, for the sake of the blog post, allows us to retrieve information about different keyboards.
 
@@ -203,7 +203,7 @@ class KeyboardController extends Controller
 
 Now we are getting very close to having a controller that matches our other resourceful controllers...but there is still one thing missing: we are still injecting a `string` based ID to the controller and we `new` up the `Keyboard` inline.
 
-# Route Model Binding for POPOs
+## Route Model Binding for POPOs
 
 Route model binding is right up there as one of my favourite Laravel features. It isn't even a huge game changing feature, but it is a small feature I use so much that I would miss it more than I could ever express if it were to disappear from the framework.
 
@@ -253,7 +253,7 @@ We now have a minimal representation of a `Keyboard` in our app, and because of 
 
 ## But wait, there's more!
 
-Turns out I was telling fibs when I said we couldn't use Implicit Route Model Binding. As Martin Bean [pointed out on Twitter](https://twitter.com/martinbean/status/1316921371318943747) we _can_ use it if we make our `Keyboard` class implement [the `UrlRoutable` interface](https://github.com/laravel/framework/blob/43bea00fd27c76c01fd009e46725a54885f4d2a5/src/Illuminate/Contracts/Routing/UrlRoutable.php)!
+Turns out I was telling fibs when I said we couldn't use Implicit Route Model Binding. As Martin Bean [pointed out on Twitter](https://x.com/martinbean/status/1316921371318943747) we _can_ use it if we make our `Keyboard` class implement [the `UrlRoutable` interface](https://github.com/laravel/framework/blob/43bea00fd27c76c01fd009e46725a54885f4d2a5/src/Illuminate/Contracts/Routing/UrlRoutable.php)!
 
 Implementing this interface on the class means we can remove the `Route::bind(...)` call in the `RouteServiceProvider`. So you have the flexibility of discovering the binding via service provider or an implemented interface - you choose what is best for your project.
 

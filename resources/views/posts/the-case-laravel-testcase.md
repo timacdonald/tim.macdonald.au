@@ -84,7 +84,7 @@ This was on PHP 7.2.19 without Xdebug on the following machine.
 
 ![Macbook Pro Retina 2012. Operating system: macOS 10.14.5. Processor: 2.3 GHz Intel Core i7. Memory: 8 GB 1600 MHz DDR3.](<?php $e($url->asset('system-report.png')); ?>)
 
-I was worried my machine would have a big impact on these results, so I [asked on Twitter](https://twitter.com/timacdonald87/status/1144067916146462720) and in the PHP Australia slack channel if others would be kind enough run the suite as well. [Jordan suggested](https://twitter.com/jordanpittman/status/1144070900947607557) it might also be good to repeat the suite a few times to account for PHPUnit's startup time.
+I was worried my machine would have a big impact on these results, so I [asked on Twitter](https://x.com/timacdonald87/status/1144067916146462720) and in the PHP Australia slack channel if others would be kind enough run the suite as well. [Jordan suggested](https://x.com/jordanpittman/status/1144070900947607557) it might also be good to repeat the suite a few times to account for PHPUnit's startup time.
 
 Here are some of the results (some of which you can also see in the Twitter thread) from community members who were awesome enough to run the suite for me to gather some additional data points. These times are reflective of one loop through the test suite, i.e. 1,500 tests.
 
@@ -145,7 +145,7 @@ I've been digging through the bootstrapping process and I can't imagine there is
 
 But wait...there's more!
 
-So I had all but shared this post on Twitter without providing any sigificant performance suggestions, which is fine - but then I remembered something [Jess Archer](https://twitter.com/jessarchercodes) and I had chatted about previously: caching the config, routes, etc before a test run. The thinking at the time was that it brought the test run more inline with production - which is always a good thing. Turns out that isn't the end of the story though.
+So I had all but shared this post on Twitter without providing any sigificant performance suggestions, which is fine - but then I remembered something [Jess Archer](https://x.com/jessarchercodes) and I had chatted about previously: caching the config, routes, etc before a test run. The thinking at the time was that it brought the test run more inline with production - which is always a good thing. Turns out that isn't the end of the story though.
 
 As mentioned previously, everytime the kernel boots it loads the config. If you have a large test suite that is a whole heap of file I/O that is happening at the beginning of each test. So the big question is: what kind of impact would caching the config before the test run have? And the answer: it turns out...a decent one.
 
@@ -205,7 +205,7 @@ It is important to keep in mind that this won’t translate to a huge payoff in 
 
 ### Where to from here
 
-I'll keep this post updated - and probably [yell about it a bit on Twitter](https://twitter.com/timacdonald87) as well, so if you have any interest in keeping up with the status of the PRs (or if they aren't suitable, the package) check back soon.
+I'll keep this post updated - and probably [yell about it a bit on Twitter](https://x.com/timacdonald87) as well, so if you have any interest in keeping up with the status of the PRs (or if they aren't suitable, the package) check back soon.
 
 **Update 1**: Just submitted the Pull Requests. Would love any feedback you have on the implementation! [Check them out](https://github.com/laravel/framework/pull/28998).
 

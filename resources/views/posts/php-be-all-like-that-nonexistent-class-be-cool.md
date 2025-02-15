@@ -123,4 +123,4 @@ class PhpWillYellAtYou extends NonExistentClass
 
 Check out a [demo on 3v4l](https://3v4l.org/4LM5A).
 
-If you know of any other scenarios where this can happen, I would love to hear about them. [Hit me up on Twitter](https://twitter.com/timacdonald87) and I will update the post.
+If you know of any other scenarios where this can happen, I would love to hear about them. [Hit me up on Twitter](https://x.com/timacdonald87) and I will update the post.

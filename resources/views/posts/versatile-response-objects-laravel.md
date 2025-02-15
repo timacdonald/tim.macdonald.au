@@ -26,7 +26,7 @@ $page = Page::fromPost(
 
 ?>
 
-I've been tinkering with a new way of returning various response formats by introducing dedicated response objects to my Laravel web applications. This has been heavily inspired by [DHH](https://twitter.com/dhh) and [Adam Wathan](https://twitter.com/adamwathan)'s chats on the [Full Stack Radio Podcast](http://www.fullstackradio.com) and I thought I would share my journey through, and ideas on, it with you.
+I've been tinkering with a new way of returning various response formats by introducing dedicated response objects to my Laravel web applications. This has been heavily inspired by [DHH](https://x.com/dhh) and [Adam Wathan](https://x.com/adamwathan)'s chats on the [Full Stack Radio Podcast](http://www.fullstackradio.com) and I thought I would share my journey through, and ideas on, it with you.
 
 ## CRUD controller
 Within my application I generally, if not always, approach my controllers from a [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) only perspective. A `SandwichController` would provide the standard CRUD controller methods: `index`, `create`, `store`, `show`, `edit`,  `update`, and `destroy`. Each of these methods would return a response suitable for my web interface, i.e. a view or a redirect.
@@ -136,7 +136,7 @@ public function index(Request $request)
 ```
 
 ## Ah-hah! Response objects & extensions
-I listened to DHH and Adam talking about dealing with different response formats by looking at the `Accepts` header which works well with an API driven project. I also saw Adam tweet that he had [put together a macro](https://twitter.com/adamwathan/status/898244245433266176) to help with this kinda thing. In addition to this, I also saw the [`Responsable` interface](https://github.com/laravel/framework/blob/56a58e0fa3d845bb992d7c64ac9bb6d0c24b745a/src/Illuminate/Contracts/Support/Responsable.php) Laravel provided.
+I listened to DHH and Adam talking about dealing with different response formats by looking at the `Accepts` header which works well with an API driven project. I also saw Adam tweet that he had [put together a macro](https://x.com/adamwathan/status/898244245433266176) to help with this kinda thing. In addition to this, I also saw the [`Responsable` interface](https://github.com/laravel/framework/blob/56a58e0fa3d845bb992d7c64ac9bb6d0c24b745a/src/Illuminate/Contracts/Support/Responsable.php) Laravel provided.
 
 It all looked pretty neat and the cogs started turning, but I was busy on other projects and didn't have time to play and work out a better solution.
 
