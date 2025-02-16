@@ -47,7 +47,11 @@ $production = ! getenv('LOCAL');
  * Capture request...
  */
 
+$method = $_SERVER['REQUEST_METHOD'] ?? '';
 $path = $_SERVER['REQUEST_URI'] ?? '';
+$base = $production
+    ? 'https://tim.macdonald.au'
+    : 'http://'.$_SERVER['HTTP_HOST'];
 
 $path = explode('?', $path, 2)[0] ?? $path;
 
@@ -55,12 +59,7 @@ if (str_ends_with($path, '/index.html')) {
     $path = substr($path, 0, -10);
 }
 
-$path = '/'.trim($path, '/');
-
-$request = new Request(
-    base: $production ? 'https://tim.macdonald.au' : 'http://'.$_SERVER['HTTP_HOST'],
-    path: $path,
-);
+$request = new Request($base, $method, $path);
 
 /*
  * Create services...
@@ -145,7 +144,7 @@ try {
     /*
      * Only allow GET or HEAD requests for known routes...
      */
-    if (! in_array($_SERVER['REQUEST_METHOD'], ['GET', 'HEAD'], strict: true)) {
+    if (! in_array($request->method, ['get', 'head'], strict: true)) {
         throw HttpException::methodNotAllowed();
     }
 
@@ -187,6 +186,6 @@ foreach ($headers as $key => $value) {
     header("{$key}: {$value}");
 }
 
-if ($_SERVER['REQUEST_METHOD'] !== 'HEAD') {
+if ($request->method === 'get') {
     echo $body;
 }

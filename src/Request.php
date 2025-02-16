@@ -8,11 +8,15 @@ readonly class Request
 
     public string $path;
 
+    public string $method;
+
     public function __construct(
         string $base,
+        string $method,
         string $path,
     ) {
         $this->base = rtrim($base, '/');
+        $this->method = mb_strtolower($method);
         $this->path = '/'.ltrim($path, '/');
     }
 
