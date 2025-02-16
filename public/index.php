@@ -136,7 +136,7 @@ $handler = static fn (): Response => match ($request->path) {
 };
 
 /*
- * Resolve the response...
+ * Determine the response...
  */
 
 try {
@@ -165,7 +165,7 @@ try {
 }
 
 /*
- * Resolve the response...
+ * Resolve the response values...
  */
 
 $body = $response->render();
