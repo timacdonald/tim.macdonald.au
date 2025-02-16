@@ -20,8 +20,18 @@
                         </a>
                     </li>
                     <li class="mt-6 ml-6">
+                        <a href="https://bsky.app/profile/tim.macdonald.au" class="text-electric-violet-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-600">
+                            Bluesky
+                        </a>
+                    </li>
+                    <li class="mt-6 ml-6">
                         <a href="https://x.com/timacdonald87" class="text-electric-violet-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-600">
                             X (Twitter)
+                        </a>
+                    </li>
+                    <li class="mt-6 ml-6">
+                        <a href="https://www.linkedin.com/in/timacdonaldau/" class="text-electric-violet-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-600">
+                            LinkedIn
                         </a>
                     </li>
                     <li class="mt-6 ml-6">
@@ -51,8 +61,18 @@
                                 </a>
                             </li>
                             <li class="mt-6">
+                                <a href="https://bsky.app/profile/tim.macdonald.au" class="text-electric-violet-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-600">
+                                    Bluesky
+                                </a>
+                            </li>
+                            <li class="mt-6">
                                 <a href="https://x.com/timacdonald87" class="text-electric-violet-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-600">
                                     X (Twitter)
+                                </a>
+                            </li>
+                            <li class="mt-6">
+                                <a href="https://www.linkedin.com/in/timacdonaldau/" class="text-electric-violet-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-600">
+                                    LinkedIn
                                 </a>
                             </li>
                             <li class="mt-6">

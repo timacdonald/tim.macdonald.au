@@ -49,15 +49,15 @@ $page = new Page(
                 <span class="ml-2">Melbourne, Australia</span>
             </div>
         </header>
-        <ul>
+        <ul class="pt-16 md:pt-24">
             <?php foreach ($collection('posts') as $post) { ?>
-                <li class="relative pb-16 md:pb-8 md:pt-4 my-16 md:-ml-8 md:pl-8 md:border-l-2 border-electric-violet-100 dark:border-electric-violet-900">
+                <li class="relative pb-16 md:pb-24">
                     <h3 class="text-lg font-black text-electric-violet-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-600 md:text-2xl">
                         <a href="<?php $e($url->page($post)); ?>">
                             <?php $e($post->title); ?>
                         </a>
                     </h3>
-                    <div class="flex items-center mt-2">
+                    <div class="flex items-center mt-3">
                         <div class="flex gap-2 flex-shrink-0 mr-2 items-center">
                             <?php if (in_array(Format::Article, $post->formats)) { ?>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="w-4 h-4 fill-current">
@@ -78,10 +78,9 @@ $page = new Page(
                             </time>
                         </div>
                     </div>
-                    <p class="mt-4 leading-snug">
+                    <p class="mt-3 leading-snug">
                         <?php $e($post->description); ?>
                     </p>
-                    <div class="bg-gradient-to-r from-electric-violet-100 to-white dark:from-electric-violet-900 dark:to-near-black w-32 absolute left-0 ml-0 bottom-0" style="height:2px" aria-hidden></div>
                 </li>
             <?php } ?>
         </ul>
