@@ -35,7 +35,13 @@ class CachedResponse implements Response
 
     public function render(): string
     {
-        $path = "{$this->projectBase}/public{$this->request->path}/index.html";
+        $extension = pathinfo($this->request->path, PATHINFO_EXTENSION);
+
+        if ($extension) {
+            $path = "{$this->projectBase}/public{$this->request->path}";
+        } else {
+            $path = "{$this->projectBase}/public{$this->request->path}/index.html";
+        }
 
         $content = is_file($path)
             ? file_get_contents($path)

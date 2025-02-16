@@ -73,12 +73,14 @@ $url = new Url(
     projectBase: $projectBase,
 );
 
+$e = new E;
+
 $template = new Template($projectBase, $props = static fn () => [
     'theme' => '#5f40f6',
     'projectBase' => $projectBase,
     'request' => $request,
     'url' => $url,
-    'e' => new E,
+    'e' => $e,
     'markdown' => new Markdown,
     'capture' => $capture,
 ]);
@@ -98,7 +100,7 @@ $render = new Renderer($projectBase, $capture, static fn () => [
 ]);
 
 $redirect = static fn (string $location) => new Response(
-    callback: fn () => '',
+    callback: fn (): string => 'Redirecting to <a href="'.$e->escape($location).'">'.$e->escape($location).'</a>...',
     status: 307,
     headers: [
         'Location' => $location,
@@ -115,6 +117,9 @@ $handler = static fn (): Response => match ($request->path) {
      */
     '/' => $render('home.php'),
     '/about' => $redirect($url->to('/')),
+    '/feed.xml' => $render('feed.xml.php', headers: [
+        'content-type' => 'text/xml; charset=utf-8',
+    ]),
 
     /*
      * Dynamic routes...

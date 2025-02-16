@@ -6,6 +6,11 @@ readonly class E
 {
     public function __invoke(string $content): void
     {
-        echo htmlspecialchars($content, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+        echo $this->escape($content);
+    }
+
+    public function escape(string $content): string
+    {
+        return htmlspecialchars($content, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
     }
 }

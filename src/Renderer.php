@@ -17,8 +17,9 @@ readonly class Renderer
 
     /**
      * @param  array<string, mixed>  $props
+     * @param  array<string, string>  $headers
      */
-    public function __invoke(string $path, array $props = [], int $status = 200): Response
+    public function __invoke(string $path, array $props = [], int $status = 200, array $headers = []): Response
     {
         return new Response(function () use ($path, $props): string {
             $__path = realpath($path);
@@ -59,6 +60,6 @@ readonly class Renderer
             });
 
             return $content;
-        }, status: $status);
+        }, $status, $headers);
     }
 }
