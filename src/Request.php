@@ -17,7 +17,7 @@ readonly class Request
     ) {
         $this->base = rtrim($base, '/');
         $this->method = mb_strtolower($method);
-        $this->path = '/'.ltrim($path, '/');
+        $this->path = '/'.rtrim(ltrim($path, '/'), '/');
     }
 
     public function url(): string
