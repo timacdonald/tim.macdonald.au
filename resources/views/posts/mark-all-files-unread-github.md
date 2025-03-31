@@ -21,7 +21,7 @@ $page = Page::fromPost(
     title: 'Mark all files as un-viewed in a GitHub pull request',
     description: 'Use the "viewed" feature on GitHub PRs? Me too, and I wanted to ability to mark *all* files as un-viewed.',
     date: new DateTimeImmutable('@1743457936', new DateTimeZone('Australia/Melbourne')),
-    image: $url->asset('magic-values.png'),
+    image: $url->asset('github-viewed-social.png'),
     formats: [Format::Article],
 );
 
