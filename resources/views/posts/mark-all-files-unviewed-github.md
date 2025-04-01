@@ -35,7 +35,7 @@ I use this feature extensively while reviewing pull requests, including while I 
 
 When reviewing changes in GitHub, I often do several passes. The first is usually a general code scan that allows me to take in the full context of the change. Another to review the feature with all the context in my head. Another to check for security or performance issues. Perhaps another to ensure the tests cover the functionality implemented, or at least the critical paths.
 
-I use the viewed feature to track where I'm up to and what files I've covered, as a review is not always top-to-bottom. This means I'm often marking all files as viewed, then marking all files as un-viewed ready for my next pass at the change.
+I use the _viewed_ feature to track where I'm up to and what files I've covered, as a review is not always top-to-bottom. This means I'm often marking all files as viewed, then marking all files as un-viewed ready for my next pass at the change.
 
 Being able to collapse files is also a feature GitHub exposes. Files can be collapsed one-by-one by clicking on the left-hand chevron. You can also bulk-collapse files by holding option (on Mac) and clicking a chevron on any file.
 
