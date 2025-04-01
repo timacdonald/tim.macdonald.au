@@ -119,6 +119,7 @@ $handler = static fn (): Response => match ($request->path) {
     '/feed.xml' => $render('feed.xml.php', headers: [
         'content-type' => 'text/xml; charset=utf-8',
     ]),
+    '/mark-all-files-unread-github' => $redirect($url->to('/mark-all-files-unviewed-github/')),
 
     /*
      * Dynamic routes...
