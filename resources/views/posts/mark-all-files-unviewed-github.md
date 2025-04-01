@@ -31,9 +31,9 @@ GitHub has a feature to mark individual files as _viewed_ while reviewing a pull
 
 ![GitHub viewed feature in use while reviewing a pull request](<?php $e($url->asset('github-viewed-feature.png')); ?>)
 
-I use this feature extensively while reviewing pull requests, including while I review my own pull requests before requesting a review from the team.
+I use this feature extensively while reviewing pull requests, including while I review my code before requesting a review from the team.
 
-When I review a pull request, I often do several passes. The first is usually a general code scan that allows me to take in the full context of the change. Another to review the feature with all the context in my head. Another to check for security or performance issues. Perhaps another to ensure the tests cover the functionality implemented, or at least the critical paths.
+When reviewing changes in GitHub, I often do several passes. The first is usually a general code scan that allows me to take in the full context of the change. Another to review the feature with all the context in my head. Another to check for security or performance issues. Perhaps another to ensure the tests cover the functionality implemented, or at least the critical paths.
 
 I use the viewed feature to track where I'm up to and what files I've covered, as a review is not always top-to-bottom. This means I'm often marking all files as viewed, then marking all files as un-viewed ready for my next pass at the change.
 
