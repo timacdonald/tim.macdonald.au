@@ -20,7 +20,7 @@ $template('head', ['page' => $page]); ?>
             <h1 class="text-3xl font-black leading-none text-center md:text-4xl text-electric-violet-900 dark:text-text-100">
                 <?php $e($page->title); ?>
             </h1>
-            <div class="text-center text-sm mt-3 text-electric-violet-900">
+            <div class="text-center text-sm mt-3 text-electric-violet-900 dark:text-text-100">
                     <time datetime="<?php $e($page->date->format(DateTimeImmutable::ATOM)); ?>">
                         <?php $e($page->date->format('jS F, Y')); ?>
                     </time>
