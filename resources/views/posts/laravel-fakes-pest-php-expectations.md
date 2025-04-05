@@ -28,7 +28,7 @@ $page = Page::fromPost(
 
 ?>
 
-I enjoy creating fake objects while writing tests. These fake objects are similar to Laravel's testing fakes, such as `Mail::fake()`, in that they have named assertions attached to them. Throughout this post I'll use a HTTP client fake to illustrate the idea.
+I enjoy creating fake objects to assist with testing. These fake objects are similar to Laravel's testing fakes, such as `Mail::fake()`, in that they have named assertions attached to them. Throughout this post I'll use a custom HTTP client fake to illustrate the idea.
 
 ```php
 $client = new ClientFake;
@@ -45,7 +45,7 @@ expect($frameworks)->toHaveCount(5);
 expect($frameworks[0])->toBe('Laravel');
 ```
 
-Because I write a lot of _feature_ tests, I often I'm making assertions and expectations alongside each other:
+Because I write a lot of _feature_ tests, I am often using the `assert...` and `expect` APIs alongside each other:
 
 ```php
 $client = new ClientFake;
@@ -53,11 +53,13 @@ $user = User::factory()->create();
 
 // ...
 
+expect($user)->toHaveProperty(/* ... */);
 $client->assertSent(new Request(/* ... */));
-expect($user)->toHaveProperty(/* ... */);
 ```
 
-This inconsistency was bothering me. I wanted to unify the testing API, whether I was working with a fake or not. Thanks to Pest's custom expectations, I was able to keep my fake objects and named assertions while also creating more symmetrical test code:
+This inconsistency was bothering me. I wanted to unify the testing API, whether I was working with a fake or not.
+
+Thanks to Pest's [_custom expectations_](https://pestphp.com/docs/custom-expectations) feature, I was able to keep my fake objects and add named expectations to create more symmetrical test code:
 
 ```php
 $client = new ClientFake;
@@ -65,11 +67,11 @@ $user = User::factory()->create();
 
 // ...
 
-expect($client)->toHaveSent(new Request(/* ... */));
 expect($user)->toHaveProperty(/* ... */);
+expect($client)->toHaveSent(new Request(/* ... */));
 ```
 
-[Custom expectations](https://pestphp.com/docs/custom-expectations) are not a new thing. I've created many of them throughout the years. The thing that was new to me was accessing _and modifying_ the `$this->value` property of the custom expectation.
+Custom expectations are not a new thing. I've created many of them throughout the years. The thing that was new to me was accessing _and modifying_ the `$this->value` property within the custom expectation.
 
 Here is the skeleton of the custom expectation:
 
@@ -89,9 +91,9 @@ expect()->extend('toHaveSent', function (Request $request) {
 });
 ```
 
-In the case of `toHaveSent`, I do not want to make assertions against the entire `ClientFake` object; I want to check against one of the client's properties. I'm trying to test that the client's `public array $requestsSent` property contains the given request.
+In the case of my `toHaveSent` expectation, I do not want to make assertions against the entire `ClientFake` object; I want to check against one of the client's properties. More specifically, I'm trying to test that the client's `requestsSent` property contains the given request.
 
-To achieve this, I'm able to modify the expectation's value:
+To achieve this, I'm able to modify the expectation's value on the fly within the callback:
 
 ```php
 expect()->extend('toHaveSent', function (Request $request) {
@@ -112,14 +114,14 @@ expect()->extend('toHaveSent', function (Request $request) {
 });
 ```
 
-This leaves me with a clean and unified testing API for both general data and fake objects:
+This leaves a clean and unified testing API for both general data and fake objects:
 
 ```php
-expect($client)->toHaveSent(new Request(/* ... */));
 expect($user)->toHaveProperty(/* ... */);
+expect($client)->toHaveSent(new Request(/* ... */));
 ```
 
-If I were to have multiple test fakes where the `toHaveSent` expectation could be applied, e.g., a custom mail fake:
+If I were to have multiple test fakes that could use the `toHaveSent` expectation, e.g., a custom mail fake:
 
 ```php
 $mail = new MailFake;
@@ -162,7 +164,7 @@ expect($client)->toHaveSent(new Request(/* ... */));
 
 ## Epilogue
 
-Although I could have reached raw expections or Pest's higher order testing, I was not satisfied with aesthetics trade off when compared to the original `$client->assertSent(...)` API.
+Although I could have reached for raw expectations or Pest's higher order testing, I was not satisfied with aesthetics trade off when compared to the original `$client->assertSent(...)` API.
 
 ```php
 expect($client->requestsSent)->toContainEqual(new Request(/* ... */));
@@ -172,4 +174,3 @@ expect($client)->requestsSent->toContainEqual(new Request(/* ... */));
 
 $client->assertSent(new Request(/* ... */));
 ```
-
