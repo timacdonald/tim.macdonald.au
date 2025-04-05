@@ -18,7 +18,7 @@ use TiMacDonald\Website\Page;
 
 $page = Page::fromPost(
     file: __FILE__,
-    title: 'Git rebase: A love story',
+    title: 'Git rebase: a love story',
     description: "A (not so lightning) talk about git rebase and the things it enables.",
     date: new DateTimeImmutable('@1627534985', new DateTimeZone('Australia/Melbourne')),
     image: $url->asset('rebase.png'),

@@ -17,7 +17,7 @@ use TiMacDonald\Website\Page;
 
 $page = Page::fromPost(
     file: __FILE__,
-    title: 'Single-use Tests',
+    title: 'Single-use tests',
     description: "Tests I write are usually written in Pest or Jest. I also usually commit them to a code repository - but not all automated tests should be committed. I wrote, what I consider to be an automated test, that was a single-use test. It served it's purpose and it'll forever be in my heart, but not in my repository.",
     date: new DateTimeImmutable('@1696717894', new DateTimeZone('Australia/Melbourne')),
     image: $url->asset('single-use-tests.png'),
