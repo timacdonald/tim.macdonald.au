@@ -19,7 +19,7 @@ use TiMacDonald\Website\Page;
 $page = Page::fromPost(
     file: __FILE__,
     title: 'Fake expectations',
-    description: 'Fake assertions or Pest PHP expectations: ¿Por Qué No Los Dos?',
+    description: 'A testing fake with named assertions or Pest PHP\'s expectation API: ¿Por Qué No Los Dos?',
     date: new DateTimeImmutable('now', new DateTimeZone('Australia/Melbourne')),
     image: $url->asset('magic-values.png'),
     formats: [Format::Article],
