@@ -20,10 +20,9 @@ $page = Page::fromPost(
     file: __FILE__,
     title: 'Fake expectations',
     description: 'A testing fake with named assertions or Pest PHP\'s expectation API: ¿Por Qué No Los Dos?',
-    date: new DateTimeImmutable('now', new DateTimeZone('Australia/Melbourne')),
+    date: new DateTimeImmutable('@1743820860', new DateTimeZone('Australia/Melbourne')),
     image: $url->asset('fake-expectations.png'),
     formats: [Format::Article],
-    hidden: true,
 );
 
 ?>
