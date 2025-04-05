@@ -58,7 +58,7 @@ $client->assertSent(new Request(/* ... */));
 
 I started to feel that having both of these APIs alongside each other was creating unneeded mental overhead when scanning the test due to a lack of visual symmetry. I yearned for a unified testing API.
 
-Thanks to Pest's [_custom expectations_](https://pestphp.com/docs/custom-expectations) feature, I was able to add named expectations for my fake objects which created visually symmetry:
+Thanks to Pest's [_custom expectations_](https://pestphp.com/docs/custom-expectations) feature, I was able to add named expectations for my fake objects which created visual symmetry:
 
 ```php
 $client = new ClientFake;
