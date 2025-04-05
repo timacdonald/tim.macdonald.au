@@ -99,7 +99,7 @@ expect()->extend('toHaveSent', function (Request $request) {
     $this->value = $this->value->requestsSent;
 
     echo is_array($this->value); // true
-    echo $this->value[0]; // Request
+    echo $this->value[0]::class; // Test\Request
 });
 ```
 
