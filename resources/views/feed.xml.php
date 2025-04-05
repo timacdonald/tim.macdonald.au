@@ -29,7 +29,7 @@ echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"; ?>
     </author>
     <icon><?php $e($url->asset('profile.png')); ?></icon>
     <logo><?php $e($url->asset('fallback.png')); ?></logo>
-    <?php foreach ($collection('posts') as $post) { ?>
+    <?php foreach ($collection->published('posts') as $post) { ?>
         <entry>
             <id><?php $e($url->page($post)); ?></id>
             <title><?php $e($post->title); ?></title>

@@ -115,17 +115,22 @@ $handler = static fn (): Response => match ($request->path) {
      * Static routes...
      */
     '/' => $render('home.php'),
-    '/about' => $redirect($url->to('/')),
     '/feed.xml' => $render('feed.xml.php', headers: [
         'content-type' => 'text/xml; charset=utf-8',
     ]),
+
+    /*
+     * Redirects...
+     */
+    '/wip' => $redirect($url->to('/')),
+    '/about' => $redirect($url->to('/')),
     '/mark-all-files-unread-github' => $redirect($url->to('/mark-all-files-unviewed-github/')),
 
     /*
      * Dynamic routes...
      */
     default => (static function () use ($render, $request, $collection, $url): Response {
-        foreach ($collection('posts') as $post) {
+        foreach ($collection->all('posts') as $post) {
             if ($url->page($post) === $request->url()) {
                 return $render($post->file);
             }

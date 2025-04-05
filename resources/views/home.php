@@ -50,7 +50,7 @@ $page = new Page(
             </div>
         </header>
         <ul class="pt-16 md:pt-24">
-            <?php foreach ($collection('posts') as $post) { ?>
+            <?php foreach ($collection->published('posts') as $post) { ?>
                 <li class="relative pb-16 md:pb-24">
                     <h3 class="text-lg font-black text-electric-violet-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-600 md:text-2xl">
                         <a href="<?php $e($url->page($post)); ?>">

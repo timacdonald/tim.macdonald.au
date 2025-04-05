@@ -10,5 +10,11 @@ interface Collection
      * @param  array<string, mixed>  $props
      * @return list<Page>
      */
-    public function __invoke(string $name, array $props = []): array;
+    public function all(string $name, array $props = []): array;
+
+    /**
+     * @param  array<string, mixed>  $props
+     * @return list<Page>
+     */
+    public function published(string $name, array $props = []): array;
 }

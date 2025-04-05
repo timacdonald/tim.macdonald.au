@@ -18,9 +18,38 @@ class CachedCollection
      * @param  array<string, mixed>  $props
      * @return list<Page>
      */
-    public function __invoke(string $name, array $props = []): array
+    public function all(string $name, array $props = []): array
     {
-        $cachePath = "{$this->projectBase}/cache/{$name}-collection.php";
+        return $this->retrieve(
+            name: $name,
+            props: $props,
+            key: "{$name}-all",
+            callback: $this->collection->all(...),
+        );
+    }
+
+    /**
+     * @param  array<string, mixed>  $props
+     * @return list<Page>
+     */
+    public function published(string $name, array $props = []): array
+    {
+        return $this->retrieve(
+            name: $name,
+            props: $props,
+            key: "{$name}-published",
+            callback: $this->collection->published(...),
+        );
+    }
+
+    /**
+     * @param  array<string, mixed>  $props
+     * @param  (callable(string, array<string, mixed>): list<Page>)  $callback
+     * @return list<Page>
+     */
+    private function retrieve(string $name, array $props, string $key, callable $callback)
+    {
+        $cachePath = "{$this->projectBase}/cache/{$key}-collection.php";
 
         try {
             return require $cachePath;
@@ -28,7 +57,7 @@ class CachedCollection
             //
         }
 
-        $collection = call_user_func($this->collection, $name, $props);
+        $collection = $callback($name, $props);
 
         file_put_contents($cachePath, "<?php return unserialize(<<<'PHP_EOF'\n".serialize($collection)."\nPHP_EOF);");
 

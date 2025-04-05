@@ -20,7 +20,7 @@ readonly class Collection implements CollectionContract
      * @param  array<string, mixed>  $props
      * @return list<Page>
      */
-    public function __invoke(string $name, array $props = []): array
+    public function all(string $name, array $props = []): array
     {
         $paths = glob("{$this->projectBase}/resources/views/{$name}/*");
 
@@ -28,7 +28,7 @@ readonly class Collection implements CollectionContract
             throw new RuntimeException("Unable to glob for collection [{$name}].");
         }
 
-        $collection = array_map(function (string $__path) use ($props): ?Page {
+        $collection = array_map(function (string $__path) use ($props): Page {
             $props = [
                 ...$props,
                 ...call_user_func($this->props),
@@ -48,19 +48,24 @@ readonly class Collection implements CollectionContract
                 throw new RuntimeException("Did not find Page in [{$__path}].");
             }
 
-            if ($page->hidden) {
-                return null;
-            }
-
             return $page;
         }, $paths);
-
-        $collection = array_filter($collection);
 
         usort($collection, static function (Page $a, Page $b): int {
             return $a->date < $b->date ? 1 : -1;
         });
 
         return $collection;
+    }
+
+    /**
+     * @param  array<string, mixed>  $props
+     * @return list<Page>
+     */
+    public function published(string $name, array $props = []): array
+    {
+        return array_values(
+            array_filter($this->all($name, $props), fn (Page $page) => ! $page->hidden)
+        );
     }
 }
