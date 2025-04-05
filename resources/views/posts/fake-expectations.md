@@ -57,9 +57,9 @@ expect($user)->toHaveProperty(/* ... */);
 $client->assertSent(new Request(/* ... */));
 ```
 
-This inconsistency was bothering me. I wanted to unify the testing API, whether I was working with a fake or not.
+I started to feel that having both of these APIs alongside each other was creating unneeded mental overhead when scanning the assertions due to a lack of visual symmetry. I wanted to unify the testing API.
 
-Thanks to Pest's [_custom expectations_](https://pestphp.com/docs/custom-expectations) feature, I was able to keep my fake objects and add named expectations to create more symmetrical test code:
+Thanks to Pest's [_custom expectations_](https://pestphp.com/docs/custom-expectations) feature, I was able to add named expectations for my fake objects which created visually symmetry:
 
 ```php
 $client = new ClientFake;
@@ -81,7 +81,7 @@ expect()->extend('toHaveSent', function (Request $request) {
 });
 ```
 
-The value passed to the expectation, e.g., `expect($client)`, is made available within the custom expectation. Pest makes this happen by re-binding the value of `$this` within the callback:
+The value passed to the expectation is made available within the custom expectation. Pest makes this happen by re-binding the value of `$this` within the callback:
 
 ```php
 // expect($client)
