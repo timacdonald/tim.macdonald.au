@@ -28,10 +28,10 @@ $page = Page::fromPost(
 
 ?>
 
-I enjoy creating fake objects for testing. These fake objects are similar to Laravel's testing fakes in that they have named assertions attached to them, e.g.,
+I enjoy creating fake objects while writing tests. These fake objects are similar to Laravel's testing fakes, such as `Mail::fake()`, in that they have named assertions attached to them. Throughout this post I'll use a HTTP client fake to illustrate the idea.
 
 ```php
-$client = new FakeClient;
+$client = new ClientFake;
 
 // ...
 
@@ -45,10 +45,10 @@ expect($frameworks)->toHaveCount(5);
 expect($frameworks[0])->toBe('Laravel');
 ```
 
-Because I write a lot of feature tests, I often find my tests end up making assertions and expectations together, e.g.,
+Because I write a lot of _feature_ tests, I often I'm making assertions and expectations alongside each other:
 
 ```php
-$client = new FakeClient;
+$client = new ClientFake;
 $user = User::factory()->create();
 
 // ...
@@ -57,10 +57,10 @@ $client->assertSent(new Request(/* ... */));
 expect($user)->toHaveProperty(/* ... */);
 ```
 
-This inconsistency was bothering me. I decided see if I could unify my testing API. Thanks to Pest's custom expectations, I was able to keep my fake objects and named assertions while also creating more symmetrical test code:
+This inconsistency was bothering me. I wanted to unify the testing API, whether I was working with a fake or not. Thanks to Pest's custom expectations, I was able to keep my fake objects and named assertions while also creating more symmetrical test code:
 
 ```php
-$client = new FakeClient;
+$client = new ClientFake;
 $user = User::factory()->create();
 
 // ...
@@ -82,12 +82,14 @@ expect()->extend('toHaveSent', function (Request $request) {
 The value passed to the expectation, e.g., `expect($client)`, is made available within the custom expectation. Pest makes this happen by re-binding the value of `$this` within the callback:
 
 ```php
+// expect($client)
+
 expect()->extend('toHaveSent', function (Request $request) {
-    echo $this->value::class; // Test\FakeClient
+    echo $this->value::class; // Test\ClientFake
 });
 ```
 
-In the case of `toHaveSent`, I do not want to make assertions against the entire `FakeClient` object; I want to check against one of the client's properties. I'm trying to test that the client's `public array $requestsSent` property contains the given request.
+In the case of `toHaveSent`, I do not want to make assertions against the entire `ClientFake` object; I want to check against one of the client's properties. I'm trying to test that the client's `public array $requestsSent` property contains the given request.
 
 To achieve this, I'm able to modify the expectation's value:
 
@@ -117,12 +119,57 @@ expect($client)->toHaveSent(new Request(/* ... */));
 expect($user)->toHaveProperty(/* ... */);
 ```
 
-## Epilogue
-
-Although I could have reached for Pest's higher order testing, I am not satisfied with this as a clean replacement for the fake object assertions:
+If I were to have multiple test fakes where the `toHaveSent` expectation could be applied, e.g., a custom mail fake:
 
 ```php
-expect($client->requstsSent)->toContainEqual(new Request(/* ... */));
-expect($user)->toHaveProperty(/* ... */);
+$mail = new MailFake;
+$client = new ClientFake;
 
+// ...
+
+expect($mail)->toHaveSent(new Email(/* ... */));
+expect($client)->toHaveSent(new Request(/* ... */));
 ```
+
+I can augment the callback to handle multiple types:
+
+```php
+expect()->extend('toHaveSent', function (Request|Email $needle) {
+    $this->value = match ($this->value::class) {
+        ClientFake::class => $this->value->requestsSent,
+        MailFake::class => $this->value->mailSent,
+        default => throw new RuntimeException('Unexpected class encounterd ['.$this->value::class.'].'),
+    };
+
+    return $this->toContainEqual($needle);
+});
+```
+
+Leaving us with the final result:
+
+```php
+$mail = new MailFake;
+$client = new ClientFake;
+$user = User::factory()->create();
+
+// ...
+
+expect($user)->toHaveProperty(/* ... */);
+expect($mail)->toHaveSent(new Email(/* ... */));
+expect($client)->toHaveSent(new Request(/* ... */));
+```
+
+
+## Epilogue
+
+Although I could have reached raw expections or Pest's higher order testing, I was not satisfied with aesthetics trade off when compared to the original `$client->assertSent(...)` API.
+
+```php
+expect($client->requestsSent)->toContainEqual(new Request(/* ... */));
+expect($client)->requestsSent->toContainEqual(new Request(/* ... */));
+
+// vs
+
+$client->assertSent(new Request(/* ... */));
+```
+
