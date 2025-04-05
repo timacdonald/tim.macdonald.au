@@ -75,6 +75,7 @@ $url = new Url(
 $e = new E;
 
 $template = new Template($projectBase, $props = static fn () => [
+    'production' => $production,
     'theme' => '#5f40f6',
     'projectBase' => $projectBase,
     'request' => $request,

@@ -69,6 +69,11 @@ use TiMacDonald\Website\OgType;
     </head>
     <body class="flex flex-col min-h-screen">
         <div class="h-2 bg-purple-500 dark:bg-purple-400"></div>
+        <?php if ($page->hidden) { ?>
+            <div class="bg-electric-violet-950 flex text-white items-center justify-center text-center leading-none px-2 h-14">
+                This post is hidden
+            </div>
+        <?php } ?>
         <button class="fixed top-0 right-0 z-10 flex items-center justify-center w-10 h-10 mt-4 mr-4 text-electric-violet-600 rounded-full dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-600 bg-electric-violet-200 dark:bg-text-100 bg-opacity-25 dark:bg-opacity-25 bg-blur-5" aria-label="Open menu" data-micromodal-trigger="main-menu">
             <svg role="img" class="w-5 h-5 fill-current" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
                 <path d="m 1,9.6262715 12,0 0,2.6837195 -12,0 z m 0,-3.909844 12,0 0,2.68288 -12,0 z m 0,-4.026418 12,0 0,2.684558 -12,0 z"/>

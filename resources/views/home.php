@@ -50,7 +50,7 @@ $page = new Page(
             </div>
         </header>
         <ul class="pt-16 md:pt-24">
-            <?php foreach ($collection->published('posts') as $post) { ?>
+            <?php foreach ($collection->{$production ? 'published' : 'all'}('posts') as $post) { ?>
                 <li class="relative pb-16 md:pb-24">
                     <h3 class="text-lg font-black text-electric-violet-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-600 md:text-2xl">
                         <a href="<?php $e($url->page($post)); ?>">
@@ -78,6 +78,11 @@ $page = new Page(
                             </time>
                         </div>
                     </div>
+                    <?php if ($post->hidden) { ?>
+                        <div class="mt-3 bg-electric-violet-950 inline-flex text-white items-center justify-center text-center leading-none px-2 h-8 rounded-sm">
+                            This post is hidden
+                        </div>
+                    <?php } ?>
                     <p class="mt-3 leading-snug">
                         <?php $e($post->description); ?>
                     </p>

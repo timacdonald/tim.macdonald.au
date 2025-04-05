@@ -141,7 +141,7 @@ article .rich-text .anchor:hover svg {
 
 @screen dark {
     .rich-text img {
-        border: 1px solid theme('colors.text.700');
+        border: 1px solid theme('colors.electric-violet.950');
         background-color: theme('colors.purple.900');
     }
 }
@@ -213,7 +213,7 @@ article .rich-text .anchor:hover svg {
 @screen dark {
     .rich-text blockquote {
         border-left: theme('spacing.2') solid theme('colors.text.600');
-        background-color: theme('colors.text.700');
+        background-color: theme('colors.electric-violet.950');
     }
 }
 
@@ -241,7 +241,7 @@ article .rich-text .anchor:hover svg {
 }
 
 .rich-text table th {
-    color: theme('colors.text.700');
+    color: theme('colors.electric-violet.950');
     font-weight: theme('fontWeight.extrabold');
     background-color: theme('colors.text.100');
 }
@@ -249,7 +249,7 @@ article .rich-text .anchor:hover svg {
 @screen dark {
     .rich-text table th {
         color: theme('colors.text.100');
-        background-color: theme('colors.text.700');
+        background-color: theme('colors.electric-violet.950');
     }
 }
 
@@ -263,7 +263,7 @@ article .rich-text .anchor:hover svg {
 @screen dark {
     .rich-text table td,
     .rich-text table th {
-        border: 1px solid theme('colors.text.700');
+        border: 1px solid theme('colors.electric-violet.950');
     }
 }
 
@@ -279,7 +279,7 @@ article .rich-text .anchor:hover svg {
 
 @screen dark {
     .rich-text :not(pre) > code {
-        background-color: theme('colors.text.700');
+        background-color: theme('colors.electric-violet.950');
     }
 }
 
@@ -290,8 +290,13 @@ article .rich-text .anchor:hover svg {
     display: block;
     overflow-x: auto;
     margin: theme('spacing.6') -1.5rem 0;
-    background-color: theme('colors.text.700');
+    background-color: theme('colors.electric-violet.950');
     -webkit-overflow-scrolling: touch;
+}
+@screen dark {
+    .rich-text pre {
+        background-color: theme('colors.electric-violet.900');
+    }
 }
 
 @screen md {
@@ -353,13 +358,13 @@ article .rich-text .anchor:hover svg {
 }
 
 .rich-text pre .inserted {
-    color: theme('colors.text.700');
+    color: theme('colors.electric-violet.950');
     background-color: #50fa7b;
     box-shadow: 0 0 0 2px #50fa7b;
 }
 
 .rich-text pre .deleted-sign.deleted {
-    color: theme('colors.text.700');
+    color: theme('colors.electric-violet.950');
     background-color: #ff79c6;
     box-shadow: 0 0 0 2px #ff79c6;
 }

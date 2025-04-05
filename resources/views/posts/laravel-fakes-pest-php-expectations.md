@@ -20,7 +20,7 @@ $page = Page::fromPost(
     file: __FILE__,
     title: 'Fake expectations',
     description: 'Fake assertions or Pest PHP expectations: ¿Por Qué No Los Dos?',
-    date: new DateTimeImmutable('@0', new DateTimeZone('Australia/Melbourne')),
+    date: new DateTimeImmutable('now', new DateTimeZone('Australia/Melbourne')),
     image: $url->asset('magic-values.png'),
     formats: [Format::Article],
     hidden: true,

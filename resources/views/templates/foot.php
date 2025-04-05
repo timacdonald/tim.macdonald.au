@@ -11,7 +11,7 @@
  * @var \TiMacDonald\Website\Collection $collection
  */
 ?>
-        <footer class="border-t border-text-100 dark:border-text-700 mt-12 py-12">
+        <footer class="border-t border-text-100 dark:border-electric-violet-950 mt-12 py-12">
             <nav class="px-6">
                 <ul class="flex flex-wrap justify-center -mt-6 -ml-6 font-black text-xl leading-none ">
                     <li class="mt-6 ml-6">
