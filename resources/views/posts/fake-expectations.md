@@ -80,7 +80,7 @@ expect()->extend('toHaveSent', function (Request $request) {
 });
 ```
 
-The value passed to the expectation is made available within the custom expectation. Pest makes this happen by re-binding the value of `$this` within the callback:
+The value passed to the `expect` function is made available within the custom expectation. Pest makes this happen by re-binding the value of `$this` within the callback:
 
 ```php
 // expect($client)
