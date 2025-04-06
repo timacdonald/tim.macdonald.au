@@ -163,7 +163,7 @@ expect($client)->toHaveSent(new Request(/* ... */));
 
 ## Epilogue
 
-Although I could have reached for raw expectations or Pest's higher order testing, I was not satisfied with aesthetics trade off when compared to the original `$client->assertSent(...)` API.
+Although I could have reached for raw expectations or Pest's higher order testing, I was not satisfied with the aesthetics trade off when compared to the original `$client->assertSent(...)` API.
 
 ```php
 expect($client->requestsSent)->toContainEqual(new Request(/* ... */));
